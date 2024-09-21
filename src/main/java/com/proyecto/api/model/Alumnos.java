@@ -9,24 +9,27 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "usuario")
-public class Usuario {
+@Table(name = "alumno")
+public class Alumnos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "nombre")
+    @Column(name = "de_nombre_alumno")
     private String nombre;
 
-    @Column(name = "apellido")
+    @Column(name = "de_apellido_alumno")
     private String apellido;
 
-    @Column(name = "dni")
+    @Column(name = "dni_alumno")
     private String dni;
 
-    @Column(name = "email")
+    @Column(name = "email_alumno")
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password_alumno")
     private String password;
+
+    @Column(name = "de_carrera")
+    private String carrera;
 }
