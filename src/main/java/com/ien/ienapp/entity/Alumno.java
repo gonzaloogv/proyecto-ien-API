@@ -13,6 +13,7 @@ import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Entity
 @Setter @Getter
 @Table(name = "alumnos")
@@ -61,8 +62,8 @@ public class Alumno {
     public Alumno() {
     }
 
-    public Alumno(Long id,String nuLegajo, Double nuPromedio, Date feIngreso, Date feEgreso, Double nuPromedioGral, Integer idPlanEstudio, String tiEstadoInscripcion, Date feRegistro, Date feModificacion) {
-        this.pkAlumno = id;
+    public Alumno(Long pkAlumno, String nuLegajo, Double nuPromedio, Date feIngreso, Date feEgreso, Double nuPromedioGral, Integer idPlanEstudio, String tiEstadoInscripcion, Date feRegistro, Date feModificacion, RRHH rrhh) {
+        this.pkAlumno = pkAlumno;
         this.nuLegajo = nuLegajo;
         this.nuPromedio = nuPromedio;
         this.feIngreso = feIngreso;
@@ -70,10 +71,10 @@ public class Alumno {
         this.nuPromedioGral = nuPromedioGral;
         this.idPlanEstudio = idPlanEstudio;
         this.tiEstadoInscripcion = tiEstadoInscripcion;
-        this.feRegistro =  feRegistro;
+        this.feRegistro = feRegistro;
         this.feModificacion = feModificacion;
+        this.rrhh = rrhh;
     }
-
 
     
     

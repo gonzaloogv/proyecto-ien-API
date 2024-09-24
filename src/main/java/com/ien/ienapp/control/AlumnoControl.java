@@ -2,6 +2,7 @@
 package com.ien.ienapp.control;
 
 import com.ien.ienapp.entity.Alumno;
+import com.ien.ienapp.entity.RRHH;
 import com.ien.ienapp.service.IAlumnoService;
 import java.util.Date;
 import java.util.List;
@@ -57,10 +58,12 @@ public class AlumnoControl {
             @RequestParam(required = false, name = "idPlanEstudio") Integer idPlanEstudio,
             @RequestParam(required = false, name = "tiEstadoInscripcion") String tiEstadoInscripcion,
             @RequestParam(required = false, name = "feRegistro") Date feRegistro,
-            @RequestParam(required = false, name = "feModificacion") Date feModificacion
+            @RequestParam(required = false, name = "feModificacion") Date feModificacion,
+            @RequestParam(required = false, name = "rrhh") RRHH rrhh
             ) {
+        
     
-           interAlumno.editAlumno(id, nuLegajo, nuPromedio, feIngreso, feEgreso, nuPromedioGral, idPlanEstudio, tiEstadoInscripcion, feRegistro, feModificacion);
+           interAlumno.editAlumno(id, nuLegajo, nuPromedio, feIngreso, feEgreso, nuPromedioGral, idPlanEstudio, tiEstadoInscripcion, feRegistro, feModificacion, rrhh);
     
            Alumno alum = interAlumno.buscarAlumno(id);
            

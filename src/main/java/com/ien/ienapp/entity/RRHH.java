@@ -74,5 +74,32 @@ public class RRHH {
     @Temporal(TemporalType.TIMESTAMP)
     private Date feModificacion;
 
+    public RRHH() {
+    }
+
+    public RRHH(Integer pk_rrhh, Integer nuDni, String deNombre, String deApellido, Integer nuTelefono1, Integer nuTelefono2, Integer nuTelefono3, Integer nuCelular1, Integer nuCelular2, Integer nuCelular3, String deDireccion, String deGenero, Integer idEstadoCivil, Integer idCategoriaRRHH, String deMail, Date feNacimiento, Date feRegistro, Date feModificacion) {
+        this.pk_rrhh = pk_rrhh;
+        this.nuDni = nuDni;
+        this.deNombre = deNombre;
+        this.deApellido = deApellido;
+        this.nuTelefono1 = nuTelefono1;
+        this.nuTelefono2 = nuTelefono2;
+        this.nuTelefono3 = nuTelefono3;
+        this.nuCelular1 = nuCelular1;
+        this.nuCelular2 = nuCelular2;
+        this.nuCelular3 = nuCelular3;
+        this.deDireccion = deDireccion;
+        this.deGenero = deGenero;
+        this.idEstadoCivil = idEstadoCivil;
+        this.idCategoriaRRHH = idCategoriaRRHH;
+        this.deMail = deMail;
+        this.feNacimiento = feNacimiento;
+        this.feRegistro = feRegistro;
+        this.feModificacion = feModificacion;
+    }
+    
+    
+    
+
     
 }

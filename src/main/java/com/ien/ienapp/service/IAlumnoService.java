@@ -1,6 +1,7 @@
 package com.ien.ienapp.service;
 
 import com.ien.ienapp.entity.Alumno;
+import com.ien.ienapp.entity.RRHH;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public interface IAlumnoService {
                             Integer idPlanEstudio, 
                             String tiEstadoInscripcion, 
                             Date feRegistro, 
-                            Date feModificacion  );
+                            Date feModificacion,
+                            RRHH rrhh);
     
 }

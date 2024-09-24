@@ -2,6 +2,7 @@
 package com.ien.ienapp.service;
 
 import com.ien.ienapp.entity.Alumno;
+import com.ien.ienapp.entity.RRHH;
 import com.ien.ienapp.repository.IAlumnoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.Date;
@@ -49,7 +50,7 @@ public class AlumnoService implements IAlumnoService {
     }
 
     @Override
-    public void editAlumno(Long id,String nuLegajo, Double nuPromedio, Date feIngreso, Date feEgreso, Double nuPromedioGral, Integer idPlanEstudio, String tiEstadoInscripcion, Date feRegistro, Date feModificacion) {
+    public void editAlumno(Long id,String nuLegajo, Double nuPromedio, Date feIngreso, Date feEgreso, Double nuPromedioGral, Integer idPlanEstudio, String tiEstadoInscripcion, Date feRegistro, Date feModificacion, RRHH rrhh) {
     Alumno alum = this.buscarAlumno(id);
 
    
@@ -64,6 +65,8 @@ public class AlumnoService implements IAlumnoService {
         alum.setTiEstadoInscripcion(tiEstadoInscripcion);
         alum.setFeRegistro(feRegistro);
         alum.setFeModificacion(feModificacion);
+        alum.setFeModificacion(feModificacion);
+        alum.setRrhh(rrhh);
         
         this.saveAlumno(alum);
 
