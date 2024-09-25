@@ -6,6 +6,8 @@ import com.proyecto.api.repository.AlumnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.proyecto.api.dto.LoginRequest; // Asegúrate de importar la clase LoginRequest
+
 
 import java.util.List;
 import java.util.Map;
@@ -45,6 +47,7 @@ public class AlumnoController {
         alumnos.setApellido(alumnosRequest.getApellido());
         alumnos.setDni(alumnosRequest.getDni());
         alumnos.setEmail(alumnosRequest.getEmail());
+        alumnos.setUsuario(alumnosRequest.getUsuario());
         alumnos.setPassword(alumnosRequest.getPassword());
         alumnos.setCarrera(alumnosRequest.getCarrera());
 
