@@ -18,7 +18,7 @@ public class ProvinciasService {
         return provinciasRepository.findAll();
     }
 
-    public Optional<Provincias> getProvinciaById(Long id) {
+    public Optional<Provincias> getProvinciaById(Integer id) {
         return provinciasRepository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class ProvinciasService {
         return provinciasRepository.save(provincia);
     }
 
-    public Provincias updateProvincia(Long id, Provincias provincia) {
+    public Provincias updateProvincia(Integer id, Provincias provincia) {
         Optional<Provincias> existingProvincia = provinciasRepository.findById(id);
         if (existingProvincia.isPresent()) {
             Provincias updatedProvincia = existingProvincia.get();
@@ -38,7 +38,7 @@ public class ProvinciasService {
         return null;
     }
 
-    public void deleteProvincia(Long id) {
+    public void deleteProvincia(Integer id) {
         provinciasRepository.deleteById(id);
     }
 }

@@ -2,6 +2,8 @@ package com.ien.ienapp.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -16,7 +18,7 @@ import lombok.Setter;
 public class Modulo {
     
     @Id
-    @Column(name = "Id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer pkModulo;
 
     @Column(name = "de_modulo", nullable = false)
@@ -30,4 +32,5 @@ public class Modulo {
     @Temporal(TemporalType.TIMESTAMP)
     private Date feModificacion;
     
+    public Modulo() {}
 }

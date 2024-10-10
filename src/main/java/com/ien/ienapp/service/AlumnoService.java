@@ -2,51 +2,46 @@ package com.ien.ienapp.service;
 
 import com.ien.ienapp.entity.Alumno;
 import com.ien.ienapp.repository.AlumnoRepository;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class AlumnoService {
 
-    @Autowired
-    private AlumnoRepository alumnoRepository;
+    private final AlumnoRepository alumnoRepository;
 
-    public List<Alumno> getAllAlumnos() {
-        return alumnoRepository.findAll();
+    public AlumnoService(AlumnoRepository alumnoRepository) {
+        this.alumnoRepository = alumnoRepository;
     }
 
-    public Optional<Alumno> getAlumnoById(Long id) {
-        return alumnoRepository.findById(id);
-    }
-
-    public Alumno createAlumno(Alumno alumno) {
+    // Crear un nuevo alumno
+    public Alumno crearAlumno(Alumno alumno) {
         return alumnoRepository.save(alumno);
     }
 
-    public Alumno updateAlumno(Long id, Alumno updatedAlumno) {
-        return alumnoRepository.findById(id).map(alumno -> {
-            alumno.setFeEgreso(updatedAlumno.getFeEgreso());
-            alumno.setFeIngreso(updatedAlumno.getFeIngreso());
-            alumno.setFeModificacion(updatedAlumno.getFeModificacion());
-            alumno.setFeRegistro(updatedAlumno.getFeRegistro());
-            alumno.setIdPlanEstudio(updatedAlumno.getIdPlanEstudio());
-            alumno.setNuLegajo(updatedAlumno.getNuLegajo());
-            alumno.setNuPromedio(updatedAlumno.getNuPromedio());
-            alumno.setNuPromedioGral(updatedAlumno.getNuPromedioGral());
-            alumno.setTiEstadoInscripcion(updatedAlumno.getTiEstadoInscripcion());
-            alumno.setFkAlRrhh(updatedAlumno.getFkAlRrhh());
-            alumno.setIdRol(updatedAlumno.getIdRol());
-            return alumnoRepository.save(alumno);
-        }).orElseGet(() -> {
-            updatedAlumno.setId(id);
-            return alumnoRepository.save(updatedAlumno);
-        });
+    // Obtener todos los alumnos
+    public List<Alumno> obtenerTodosLosAlumnos() {
+        return alumnoRepository.findAll();
     }
 
-    public void deleteAlumno(Long id) {
+    // Obtener un alumno por ID
+    public Optional<Alumno> obtenerAlumnoPorId(Integer id) {
+        return alumnoRepository.findById(id);
+    }
+
+    // Actualizar un alumno
+    public Alumno actualizarAlumno(Integer id, Alumno alumnoActualizado) {
+        if (alumnoRepository.existsById(id)) {
+            alumnoActualizado.setId(id);
+            return alumnoRepository.save(alumnoActualizado);
+        }
+        return null; // O lanzar una excepción
+    }
+
+    // Eliminar un alumno
+    public void eliminarAlumno(Integer id) {
         alumnoRepository.deleteById(id);
     }
 }

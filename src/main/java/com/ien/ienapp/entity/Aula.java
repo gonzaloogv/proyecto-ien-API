@@ -16,10 +16,9 @@ import lombok.Setter;
 @Table(name = "aulas")
 public class Aula {
     
-    
     @Id
     @Column(name = "Id")
-    private Long pkAula;
+    private Integer pkAula;
 
     @Column(name = "nu_capacidad_max", nullable = false)
     private Integer nuCapacidadMax;
@@ -36,14 +35,13 @@ public class Aula {
     public Aula(){
     }
     
-    public Aula(Long id, Integer nuCapacidadMax, Date feRegistro, Date feModificacion){
+    public Aula(Integer id, Integer nuCapacidadMax, Date feRegistro, Date feModificacion){
     
         this.pkAula = id;
         this.nuCapacidadMax = nuCapacidadMax;
         this.feRegistro = feRegistro;
         this.feModificacion = feModificacion;
         
-    
     }
     
 }

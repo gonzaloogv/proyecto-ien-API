@@ -21,12 +21,12 @@ public class Tema {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(name = "de_descripcion")
-    private String deDescripcion;
-
+    
     @Column(name = "de_titulo", nullable = false)
     private String deTitulo;
+    
+    @Column(name = "de_descripcion")
+    private String deDescripcion;
 
     @Column(name = "fe_modificacion")
     @Temporal(TemporalType.TIMESTAMP)

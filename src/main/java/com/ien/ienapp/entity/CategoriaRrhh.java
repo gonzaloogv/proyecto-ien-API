@@ -1,6 +1,5 @@
 package com.ien.ienapp.entity;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,7 +31,6 @@ public class CategoriaRrhh {
         this.id = Integer.parseInt(id);
     }
 
-    // Constructor que acepta un Integer
     public CategoriaRrhh(Integer id) {
         this.id = id;
     }

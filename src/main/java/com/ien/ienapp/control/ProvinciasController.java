@@ -32,7 +32,7 @@ public class ProvinciasController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Provincias> getProvinciaById(@PathVariable Long id) {
+    public Optional<Provincias> getProvinciaById(@PathVariable Integer id) {
         return provinciasService.getProvinciaById(id);
     }
 
@@ -42,12 +42,12 @@ public class ProvinciasController {
     }
 
     @PutMapping("/{id}")
-    public Provincias updateProvincia(@PathVariable Long id, @RequestBody Provincias provincia) {
+    public Provincias updateProvincia(@PathVariable Integer id, @RequestBody Provincias provincia) {
         return provinciasService.updateProvincia(id, provincia);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProvincia(@PathVariable Long id) {
+    public void deleteProvincia(@PathVariable Integer id) {
         provinciasService.deleteProvincia(id);
     }
 }

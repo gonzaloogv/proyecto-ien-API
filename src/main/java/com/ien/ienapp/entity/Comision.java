@@ -1,4 +1,3 @@
-
 package com.ien.ienapp.entity;
 
 import javax.persistence.Column;
@@ -27,14 +26,14 @@ public class Comision {
     @Column(name = "nu_codigo_comision", nullable = false)
     private String nuCodigoComision;
 
-    @Column(name = "de_carrera", nullable = false)
-    private String deCarrera;
-
     @Column(name = "nu_anio_comision", nullable = false)
     private Integer nuAnioComision;
 
-    @Column(name = "nu_anio_de_materia", nullable = false)
-    private String nuAnioDeMateria;
+    @Column(name = "de_carrera", nullable = false)
+    private String deCarrera;
+
+    @Column(name = "de_anio_de_materia", nullable = false)
+    private String deAnioDeMateria;
 
     @Column(name = "fe_registro", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -44,5 +43,5 @@ public class Comision {
     @Temporal(TemporalType.TIMESTAMP)
     private Date feModificacion;
 
-    
+    public Comision(){};
 }

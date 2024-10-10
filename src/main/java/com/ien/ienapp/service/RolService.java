@@ -5,7 +5,6 @@ import com.ien.ienapp.repository.RolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,25 +18,23 @@ public class RolService {
         return rolRepository.findAll();
     }
 
-    public Optional<Rol> getRolById(Long id) {
+    public Optional<Rol> getRolById(Integer id) {
         return rolRepository.findById(id);
     }
 
     public Rol createRol(Rol rol) {
-        rol.setFeRegistro(LocalDateTime.now()); // Asignar fecha de registro
         return rolRepository.save(rol);
     }
 
-    public Rol updateRol(Long id, Rol rol) {
+    public Rol updateRol(Integer id, Rol rol) {
         if (rolRepository.existsById(id)) {
             rol.setId(id);
-            rol.setFeModificacion(LocalDateTime.now()); // Actualizar fecha de modificación
             return rolRepository.save(rol);
         }
         return null;
     }
 
-    public void deleteRol(Long id) {
+    public void deleteRol(Integer id) {
         rolRepository.deleteById(id);
     }
 }

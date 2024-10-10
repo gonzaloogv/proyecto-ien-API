@@ -9,6 +9,9 @@ public class Profesor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
+    @Column(name = "nu_matricula")
+    private String nuMatricula;
 
     @Column(name = "fe_baja")
     private LocalDateTime feBaja;
@@ -21,9 +24,6 @@ public class Profesor {
 
     @Column(name = "fe_registro")
     private LocalDateTime feRegistro;
-
-    @Column(name = "nu_matricula")
-    private String nuMatricula;
 
     @OneToOne
     @JoinColumn(name = "Id", referencedColumnName = "Id") // Relación directa usando Id

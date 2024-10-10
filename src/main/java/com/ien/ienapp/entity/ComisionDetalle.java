@@ -1,6 +1,4 @@
-
 package com.ien.ienapp.entity;
-
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +16,6 @@ import lombok.Setter;
 @Setter @Getter
 @Table(name = "comisiones_detalles")
 public class ComisionDetalle {
-
 
     @Id
     @Column(name = "Id")
@@ -52,5 +49,5 @@ public class ComisionDetalle {
     @Temporal(TemporalType.TIMESTAMP)
     private Date feModificacion;
     
-    
+    public ComisionDetalle(){};
 }

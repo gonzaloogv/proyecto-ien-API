@@ -42,4 +42,5 @@ public class Administrativo {
     @Temporal(TemporalType.TIMESTAMP)
     private Date feModificacion;
     
+    public Administrativo() {}
 }
