@@ -1,13 +1,15 @@
 package com.ien.ienapp.control;
 
-
+import com.ien.ienapp.dto.ErrorResponseDTO;
 import com.ien.ienapp.entity.PlanesEstudios;
+import com.ien.ienapp.exception.ResourceNotFoundException;
 import com.ien.ienapp.service.PlanesEstudiosService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -18,18 +20,36 @@ public class PlanesEstudiosController {
     private PlanesEstudiosService planesEstudiosService;
 
     @GetMapping
-    public List<PlanesEstudios> getAllPlanesEstudios() { return planesEstudiosService.getAllPlanesEstudios(); }
+    public ResponseEntity<List<PlanesEstudios>> getAllPlanesEstudios() {
+        List<PlanesEstudios> planesEstudios = planesEstudiosService.getAllPlanesEstudios();
+        return ResponseEntity.ok(planesEstudios);
+    }
 
     @GetMapping("/{id}")
-    public Optional<PlanesEstudios> getPlanesEstudiosById(@PathVariable Integer id) { return planesEstudiosService.getPlanesEstudiosById(id); }
+    public ResponseEntity<?> getPlanesEstudiosById(@PathVariable Integer id) {
+        PlanesEstudios planesEstudios = planesEstudiosService.getPlanesEstudiosById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Plan estudio no encontrado con id: " + id));
+        return ResponseEntity.ok(planesEstudios);
+    }
 
     @PostMapping
-    public PlanesEstudios planesEstudios(@RequestBody PlanesEstudios planesEstudios) {
-        return planesEstudiosService.createPlanesEstudios(planesEstudios);
+    public ResponseEntity<?> crearPlanesEstudios(@RequestBody PlanesEstudios planesEstudios) {
+        PlanesEstudios nuevoPlan = planesEstudiosService.createPlanesEstudios(planesEstudios);
+        return new ResponseEntity<>(nuevoPlan, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public void deletePlanesEstudios(@PathVariable Integer id) {
+    public ResponseEntity<?> deletePlanesEstudios(@PathVariable Integer id) {
+        planesEstudiosService.getPlanesEstudiosById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Plan de estudios no encontrado con id: " + id));
+        
         planesEstudiosService.deletePlanesEstudios(id);
+        
+        ErrorResponseDTO response = new ErrorResponseDTO(
+                "Plan de estudios eliminado correctamente",
+                HttpStatus.OK.value(),
+                "ID: " + id
+        );
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

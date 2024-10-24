@@ -10,6 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class RRHHDTO {
+    private Integer id;
 
     @NotNull(message = "El DNI es obligatorio")
     @Min(value = 10000, message = "El DNI debe tener al menos 5 dígitos")

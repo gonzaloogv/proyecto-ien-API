@@ -1,45 +1,40 @@
 package com.ien.ienapp.control;
 
+import com.ien.ienapp.dto.MateriaTemaDTO;
 import com.ien.ienapp.entity.MateriaTema;
-import com.ien.ienapp.entity.MateriaTemaId;
 import com.ien.ienapp.service.MateriaTemaService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/materias-temas")
+@RequestMapping("/api/materiatema")
 public class MateriaTemaController {
+
     @Autowired
     private MateriaTemaService materiaTemaService;
 
-    @GetMapping
-    public List<MateriaTema> getAllMateriasTemas() {
-        return materiaTemaService.getAllMateriasTemas();
-    }
-
-    @GetMapping("/{idMateria}/{idTema}")
-    public ResponseEntity<MateriaTema> getMateriaTema(@PathVariable Long idMateria, @PathVariable Long idTema) {
-        MateriaTemaId id = new MateriaTemaId(idMateria, idTema);
-        MateriaTema materiaTema = materiaTemaService.getMateriaTemaById(id);
-        return materiaTema != null ? ResponseEntity.ok(materiaTema) : ResponseEntity.notFound().build();
-    }
-
+    // Cambiar a @RequestBody para que reciba un JSON con los datos
     @PostMapping
-    public ResponseEntity<MateriaTema> createMateriaTema(@RequestBody MateriaTema materiaTema) {
-        // Aquí puedes crear la relación y guardarla en la base de datos
-        MateriaTema newMateriaTema = materiaTemaService.createMateriaTema(materiaTema);
-        return new ResponseEntity<>(newMateriaTema, HttpStatus.CREATED);
+    public ResponseEntity<String> crearRelacion(@RequestBody MateriaTemaDTO materiaTemaDTO) {
+        try {
+            materiaTemaService.crearRelacion(materiaTemaDTO.getIdMateria(), materiaTemaDTO.getIdTema(), materiaTemaDTO.getFeRegistro());
+            return ResponseEntity.status(HttpStatus.CREATED).body("Relación creada exitosamente");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear la relación: " + e.getMessage());
+        }
     }
-
-    @DeleteMapping("/{idMateria}/{idTema}")
-    public ResponseEntity<Void> deleteMateriaTema(@PathVariable Long idMateria, @PathVariable Long idTema) {
-        MateriaTemaId id = new MateriaTemaId(idMateria, idTema);
-        materiaTemaService.deleteMateriaTema(id);
-        return ResponseEntity.noContent().build();
+    @GetMapping
+    public ResponseEntity<List<MateriaTema>> getAllRelaciones() {
+        try {
+            List<MateriaTema> relaciones = materiaTemaService.getAllRelaciones();
+            return ResponseEntity.ok(relaciones);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 }

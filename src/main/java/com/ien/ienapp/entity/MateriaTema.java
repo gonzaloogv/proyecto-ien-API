@@ -1,9 +1,9 @@
 package com.ien.ienapp.entity;
 
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -12,30 +12,21 @@ import javax.persistence.*;
 public class MateriaTema {
 
     @EmbeddedId
-    private MateriaTemaId id;
+    private MateriaTemaId id; // Clave primaria compuesta
 
-    // Getters y Setters
-    public MateriaTemaId getId() {
-        return id;
-    }
+    @ManyToOne
+    @MapsId("idMateria") // Enlaza el idMateria con la entidad Materia
+    @JoinColumn(name = "id_materia", nullable = false)
+    private Materia materia;
 
-    public void setId(MateriaTemaId id) {
-        this.id = id;
-    }
+    @ManyToOne
+    @MapsId("idTema") // Enlaza el idTema con la entidad Tema
+    @JoinColumn(name = "id_tema", nullable = false)
+    private Tema tema;
 
-    public Long getIdMateria() {
-        return id.getIdMateria();
-    }
+    @Column(name = "fe_registro", nullable = false)
+    private Date feRegistro; // Fecha de registro
 
-    public Long getIdTema() {
-        return id.getIdTema();
-    }
-
-    public void setIdMateria(Long idMateria) {
-        this.id.setIdMateria(idMateria);
-    }
-
-    public void setIdTema(Long idTema) {
-        this.id.setIdTema(idTema);
-    }
+    @Column(name = "fe_modificacion")
+    private Date feModificacion; // Fecha de modificación
 }

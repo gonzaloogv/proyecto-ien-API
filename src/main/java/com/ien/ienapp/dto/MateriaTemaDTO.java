@@ -1,23 +1,15 @@
 package com.ien.ienapp.dto;
 
+import java.sql.Date;
+
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class MateriaTemaDTO {
-    private Long idMateria;
-    private Long idTema;
-
-    // Getters y Setters
-    public Long getIdMateria() {
-        return idMateria;
-    }
-
-    public void setIdMateria(Long idMateria) {
-        this.idMateria = idMateria;
-    }
-
-    public Long getIdTema() {
-        return idTema;
-    }
-
-    public void setIdTema(Long idTema) {
-        this.idTema = idTema;
-    }
+    private Integer idMateria; // ID de la materia
+    private Integer idTema; // ID del tema
+    private Date feRegistro;    // ID del tema
 }

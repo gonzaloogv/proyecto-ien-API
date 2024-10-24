@@ -12,7 +12,6 @@ import lombok.Setter;
 @Setter
 @Table(name = "rrhh")
 public class RRHH {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

@@ -1,51 +1,80 @@
 package com.ien.ienapp.control;
 
+import com.ien.ienapp.dto.AlumnoDTO;
 import com.ien.ienapp.entity.Alumno;
 import com.ien.ienapp.service.AlumnoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.validation.ConstraintViolationException;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/alumnos")
 public class AlumnoController {
 
-    private final AlumnoService alumnoService;
-
-    public AlumnoController(AlumnoService alumnoService) {
-        this.alumnoService = alumnoService;
-    }
+    @Autowired
+    private AlumnoService alumnoService;
 
     @PostMapping
-    public ResponseEntity<Alumno> crearAlumno(@RequestBody Alumno alumno) {
-        Alumno nuevoAlumno = alumnoService.crearAlumno(alumno);
-        return ResponseEntity.ok(nuevoAlumno);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Alumno>> obtenerTodosLosAlumnos() {
-        List<Alumno> alumnos = alumnoService.obtenerTodosLosAlumnos();
-        return ResponseEntity.ok(alumnos);
+    public ResponseEntity<?> crearAlumno(@RequestBody AlumnoDTO alumnoDTO) {
+        try {
+            Alumno alumno = alumnoService.crearAlumno(alumnoDTO);
+            // Devuelve una respuesta en formato JSON
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Alumno creado exitosamente");
+            response.put("alumnoId", alumno.getId());
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } catch (ConstraintViolationException e) {
+            // Manejar excepciones de restricciones de la base de datos
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.singletonMap("error", "Error de restricción: " + e.getMessage()));
+        } catch (DataIntegrityViolationException e) {
+            // Manejar violaciones de integridad de datos
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.singletonMap("error", "Error de integridad de datos: " + e.getMessage()));
+        } catch (Exception e) {
+            // Manejo general de excepciones
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "Error al crear el alumno: " + e.getMessage()));
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Alumno> obtenerAlumnoPorId(@PathVariable Integer id) {
-        return alumnoService.obtenerAlumnoPorId(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<AlumnoDTO> obtenerAlumno(@PathVariable Integer id) {
+        AlumnoDTO alumnoDTO = alumnoService.obtenerAlumnoPorId(id); // no hay Optional aquí
+        return ResponseEntity.ok(alumnoDTO); // no necesitas map
+    }
+
+
+    @GetMapping
+    public ResponseEntity<List<AlumnoDTO>> obtenerTodosLosAlumnos() {
+        List<AlumnoDTO> alumnos = alumnoService.obtenerTodosLosAlumnos();
+        return ResponseEntity.ok(alumnos);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Alumno> actualizarAlumno(@PathVariable Integer id, @RequestBody Alumno alumnoActualizado) {
-        Alumno alumno = alumnoService.actualizarAlumno(id, alumnoActualizado);
-        return alumno != null ? ResponseEntity.ok(alumno) : ResponseEntity.notFound().build();
+    public ResponseEntity<String> actualizarAlumno(@PathVariable Integer id, @RequestBody AlumnoDTO alumnoDTO) {
+        try {
+            alumnoService.actualizarAlumno(id, alumnoDTO);
+            return ResponseEntity.ok("Alumno actualizado exitosamente.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al actualizar el alumno: " + e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminarAlumno(@PathVariable Integer id) {
-        alumnoService.eliminarAlumno(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<String> eliminarAlumno(@PathVariable Integer id) {
+        try {
+            alumnoService.eliminarAlumno(id);
+            return ResponseEntity.ok("Alumno eliminado exitosamente.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar el alumno: " + e.getMessage());
+        }
     }
 }

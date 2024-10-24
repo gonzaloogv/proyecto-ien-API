@@ -1,46 +1,22 @@
 package com.ien.ienapp.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.Embeddable;
 import java.io.Serializable;
-import java.util.Objects;
 
+@Getter
+@Setter
+@Embeddable
+@EqualsAndHashCode // Para asegurar que se comparen correctamente los objetos
+@NoArgsConstructor
+@AllArgsConstructor
 public class MateriaTemaId implements Serializable {
-    private Long idMateria;
-    private Long idTema;
 
-    public MateriaTemaId() {}
-
-    public MateriaTemaId(Long idMateria, Long idTema) {
-        this.idMateria = idMateria;
-        this.idTema = idTema;
-    }
-
-    // Getters and Setters
-    public Long getIdMateria() {
-        return idMateria;
-    }
-
-    public void setIdMateria(Long idMateria) {
-        this.idMateria = idMateria;
-    }
-
-    public Long getIdTema() {
-        return idTema;
-    }
-
-    public void setIdTema(Long idTema) {
-        this.idTema = idTema;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof MateriaTemaId)) return false;
-        MateriaTemaId that = (MateriaTemaId) o;
-        return Objects.equals(idMateria, that.idMateria) && Objects.equals(idTema, that.idTema);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idMateria, idTema);
-    }
+    private Integer idMateria; // ID de la materia
+    private Integer idTema; // ID del tema
 }

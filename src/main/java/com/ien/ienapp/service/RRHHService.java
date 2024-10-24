@@ -33,6 +33,7 @@ public class RRHHService {
 
     public RRHHDTO convertToDTO(RRHH rrhh) {
         RRHHDTO dto = new RRHHDTO();
+        dto.setId(rrhh.getId());
         dto.setNuDni(rrhh.getNuDni());
         dto.setDeNombre(rrhh.getDeNombre());
         dto.setDeApellido(rrhh.getDeApellido());
@@ -57,6 +58,7 @@ public class RRHHService {
     // Convertir RRHHDTO a RRHH
     public RRHH convertToEntity(RRHHDTO dto) {
         RRHH rrhh = new RRHH();
+        dto.setId(rrhh.getId());
         rrhh.setNuDni(dto.getNuDni());
         rrhh.setDeNombre(dto.getDeNombre());
         rrhh.setDeApellido(dto.getDeApellido());

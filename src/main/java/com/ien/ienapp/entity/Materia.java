@@ -14,7 +14,7 @@ import java.util.Date;
 public class Materia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer Id;
 
     @Column(name = "de_nombre", nullable = false)
     private String deNombre;

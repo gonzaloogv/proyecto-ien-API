@@ -1,53 +1,48 @@
 package com.ien.ienapp.control;
 
-import com.ien.ienapp.entity.Carrera;
+import com.ien.ienapp.dto.CarreraDTO;
 import com.ien.ienapp.service.CarreraService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/carrera")
+@RequestMapping("/api/carreras")
 public class CarreraController {
 
     @Autowired
     private CarreraService carreraService;
 
+    @PostMapping
+    public ResponseEntity<CarreraDTO> crearCarrera(@RequestBody CarreraDTO carreraDTO) {
+        CarreraDTO nuevaCarrera = carreraService.crearCarrera(carreraDTO);
+        return ResponseEntity.ok(nuevaCarrera);
+    }
+
     @GetMapping
-    public List<Carrera> getAllCarreras() {
-        return carreraService.getAllCarreras();
+    public List<CarreraDTO> getAllCarreras() {
+        return carreraService.getAllCarreras(); // Aquí devuelves List<CarreraDTO>
     }
 
     @GetMapping("/{id}")
-    public Optional<Carrera> getCarreraById(@PathVariable Integer id) {
-        return carreraService.getCarreraById(id);
-    }
-
-    @PostMapping
-    public Carrera createCarrera(@RequestBody Carrera carrera) {
-        return carreraService.createCarrera(carrera);
+    public ResponseEntity<CarreraDTO> obtenerCarreraPorId(@PathVariable Integer id) {
+        return carreraService.obtenerCarreraPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public Carrera updateCarrera(@PathVariable Integer id, @RequestBody Carrera carrera) {
-        carrera.setId(id);  // Asegúrate de establecer el ID en la entidad antes de actualizar
-        return carreraService.createCarrera(carrera);  // Se reutiliza el mismo método para guardar o actualizar
+    public ResponseEntity<CarreraDTO> actualizarCarrera(@PathVariable Integer id, @RequestBody CarreraDTO carreraDTO) {
+        CarreraDTO updatedCarrera = carreraService.actualizarCarrera(id, carreraDTO);
+        return ResponseEntity.ok(updatedCarrera);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCarrera(@PathVariable Integer id) {
-        carreraService.deleteCarrera(id);
+    public ResponseEntity<Void> eliminarCarrera(@PathVariable Integer id) {
+        carreraService.eliminarCarrera(id);
+        return ResponseEntity.noContent().build();
     }
 }
