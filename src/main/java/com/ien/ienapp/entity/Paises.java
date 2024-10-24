@@ -25,7 +25,6 @@ public class Paises {
     @Column(name = "fe_modificacion")
     private LocalDate feModificacion;
 
-    // Getters y Setters
     public Long getId() {
         return id;
     }

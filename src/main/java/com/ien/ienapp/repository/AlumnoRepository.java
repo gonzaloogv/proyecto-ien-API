@@ -5,5 +5,4 @@ import com.ien.ienapp.entity.Alumno;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AlumnoRepository extends JpaRepository<Alumno, Integer> {
-    // Métodos personalizados si es necesario
 }

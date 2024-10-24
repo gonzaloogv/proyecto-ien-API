@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MateriaTemaDTO {
-    private Integer idMateria; // ID de la materia
-    private Integer idTema; // ID del tema
-    private Date feRegistro;    // ID del tema
+    private Integer idMateria;
+    private Integer idTema;
+    private Date feRegistro;
 }

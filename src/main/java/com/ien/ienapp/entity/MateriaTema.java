@@ -12,21 +12,21 @@ import java.util.Date;
 public class MateriaTema {
 
     @EmbeddedId
-    private MateriaTemaId id; // Clave primaria compuesta
+    private MateriaTemaId id; 
 
     @ManyToOne
-    @MapsId("idMateria") // Enlaza el idMateria con la entidad Materia
+    @MapsId("idMateria") 
     @JoinColumn(name = "id_materia", nullable = false)
     private Materia materia;
 
     @ManyToOne
-    @MapsId("idTema") // Enlaza el idTema con la entidad Tema
+    @MapsId("idTema") 
     @JoinColumn(name = "id_tema", nullable = false)
     private Tema tema;
 
     @Column(name = "fe_registro", nullable = false)
-    private Date feRegistro; // Fecha de registro
+    private Date feRegistro;
 
     @Column(name = "fe_modificacion")
-    private Date feModificacion; // Fecha de modificación
+    private Date feModificacion;
 }

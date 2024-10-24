@@ -12,11 +12,11 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Embeddable
-@EqualsAndHashCode // Para asegurar que se comparen correctamente los objetos
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 public class MateriaTemaId implements Serializable {
 
-    private Integer idMateria; // ID de la materia
-    private Integer idTema; // ID del tema
+    private Integer idMateria;
+    private Integer idTema;
 }

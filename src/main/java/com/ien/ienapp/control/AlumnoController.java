@@ -1,6 +1,7 @@
 package com.ien.ienapp.control;
 
 import com.ien.ienapp.dto.AlumnoDTO;
+import com.ien.ienapp.dto.RRHHDTO;
 import com.ien.ienapp.entity.Alumno;
 import com.ien.ienapp.service.AlumnoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,22 +26,18 @@ public class AlumnoController {
     private AlumnoService alumnoService;
 
     @PostMapping
-    public ResponseEntity<?> crearAlumno(@RequestBody AlumnoDTO alumnoDTO) {
+    public ResponseEntity<?> crearAlumno(@RequestBody RRHHDTO rrhhDTO) {
         try {
-            Alumno alumno = alumnoService.crearAlumno(alumnoDTO);
-            // Devuelve una respuesta en formato JSON
+            Alumno alumno = alumnoService.crearAlumno(rrhhDTO);
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Alumno creado exitosamente");
             response.put("alumnoId", alumno.getId());
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (ConstraintViolationException e) {
-            // Manejar excepciones de restricciones de la base de datos
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.singletonMap("error", "Error de restricción: " + e.getMessage()));
         } catch (DataIntegrityViolationException e) {
-            // Manejar violaciones de integridad de datos
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.singletonMap("error", "Error de integridad de datos: " + e.getMessage()));
         } catch (Exception e) {
-            // Manejo general de excepciones
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("error", "Error al crear el alumno: " + e.getMessage()));
         }
     }

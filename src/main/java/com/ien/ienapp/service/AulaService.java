@@ -42,7 +42,6 @@ public class AulaService implements IAulaService {
           aulaRepo.deleteById(id);    
     }
     
-
     @Override
     public Aula buscarAula(Long id) {
           

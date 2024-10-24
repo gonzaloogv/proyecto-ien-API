@@ -29,7 +29,6 @@ public class RRHHDTO {
     @Min(value = 100000, message = "El celular debe tener al menos 6 dígitos")
     private BigInteger nuCelular1;
 
-    // Estos campos pueden ser opcionales, por eso no llevan @NotNull
     @Min(value = 100000, message = "El celular debe tener al menos 6 dígitos")
     private BigInteger nuCelular2;
 
@@ -49,10 +48,10 @@ public class RRHHDTO {
     private String deGenero;
 
     @NotNull(message = "El estado civil es obligatorio")
-    private Integer idEstadoCivil; // Si manejas relaciones en DTO, usa el ID o un objeto dependiente
+    private Integer idEstadoCivil;
 
     @NotNull(message = "La categoría RRHH es obligatoria")
-    private Integer idCategoriaRrhh; // Igual que con estado civil, dependiendo del modelo de dominio
+    private Integer idCategoriaRrhh; 
 
     @NotNull(message = "La localidad es obligatoria")
     private Integer idLocalidad;
@@ -64,7 +63,9 @@ public class RRHHDTO {
     @NotNull(message = "La fecha de nacimiento es obligatoria")
     private Date feNacimiento;
 
-    // Estas fechas son generadas por el sistema, así que no necesitan ser @NotNull
     private Date feRegistro;
     private Date feModificacion;
+
+    //alumnos
+    
 }

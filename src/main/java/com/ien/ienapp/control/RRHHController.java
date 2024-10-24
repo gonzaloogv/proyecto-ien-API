@@ -48,27 +48,22 @@ public class RRHHController {
     @PostMapping
     public ResponseEntity<?> createRRHH(@Valid @RequestBody RRHHDTO rrhhDTO, BindingResult result) {
         if (result.hasErrors()) {
-            // Captura los errores y crea una lista de mensajes
             List<String> errors = result.getFieldErrors().stream()
                     .map(fieldError -> fieldError.getDefaultMessage()) // Obtiene el mensaje de cada error
                     .collect(Collectors.toList());
 
-            // Devuelve un 400 con los mensajes de error
             return ResponseEntity.badRequest().body(errors);
         }
 
-        // Convertimos el DTO a entidad
         RRHH rrhh = rrhhService.convertToEntity(rrhhDTO);
 
         try {
             RRHH newRRHH = rrhhService.createRRHH(rrhh);
-            // Devolvemos el DTO del objeto creado
             return ResponseEntity.ok(rrhhService.convertToDTO(newRRHH));
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body("Error al crear RRHH: " + e.getMessage());
         }
     }
-
 
     @DeleteMapping("/{id}")
     public void deleteRRHH(@PathVariable Integer id) {

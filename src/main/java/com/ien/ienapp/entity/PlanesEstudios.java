@@ -30,6 +30,5 @@ public class PlanesEstudios {
     @Column(name = "fe_modificacion")
     private Date feModificacion;
 
-    // Constructor vacío
     public PlanesEstudios() {}
 }

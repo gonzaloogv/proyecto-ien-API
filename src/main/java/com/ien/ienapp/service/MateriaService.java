@@ -110,14 +110,13 @@ public class MateriaService {
         return null; // o lanzar una excepción si no se encuentra
     }
 
-    // Eliminar una materia
     @Transactional
     public boolean eliminarMateria(Integer id) {
         Optional<Materia> materiaOptional = materiaRepository.findById(id);
         if (materiaOptional.isPresent()) {
             materiaRepository.delete(materiaOptional.get());
-            return true; // La materia se eliminó exitosamente
+            return true; 
         }
-        return false; // La materia no se encontró
+        return false; 
     }
 }

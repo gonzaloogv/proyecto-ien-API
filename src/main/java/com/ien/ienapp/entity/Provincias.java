@@ -31,7 +31,6 @@ public class Provincias {
     @Column(name = "fe_modificacion")
     private LocalDate feModificacion;
 
-    // Getters y Setters
     public Integer getId() {
         return id;
     }

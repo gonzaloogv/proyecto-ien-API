@@ -13,7 +13,7 @@ public class CarreraDTO {
     private String deSede;
     private Integer nuDuracionHoras;
     private String deResponsable;
-    private Integer planesEstudioId; // Cambiado para representar el ID de PlanesEstudios
+    private Integer planesEstudioId; 
     private String tiCarrera;
-    private Date feRegistro; // Registro
+    private Date feRegistro;
 }

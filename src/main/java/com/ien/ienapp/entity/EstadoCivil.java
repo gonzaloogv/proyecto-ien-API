@@ -24,14 +24,12 @@ public class EstadoCivil {
     @Column(name = "fe_modificacion")
     private LocalDateTime feModificacion;
 
-    // Constructor vacío
     public EstadoCivil() {}
 
     public EstadoCivil(String id) {
         this.id = Integer.parseInt(id);
     }
 
-    // Constructor que acepta un Integer
     public EstadoCivil(Integer id) {
         this.id = id;
     }

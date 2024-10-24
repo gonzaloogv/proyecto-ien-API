@@ -18,7 +18,6 @@ public class MateriaController {
     @Autowired
     private MateriaService materiaService;
 
-    // Obtener todas las materias
     @GetMapping
     public List<MateriaDTO> getAllMaterias() {
         return materiaService.getAllMaterias();
@@ -33,27 +32,23 @@ public class MateriaController {
             materiaDTO.setId(materia.getId());
             materiaDTO.setDeNombre(materia.getDeNombre());
             materiaDTO.setTaAsistenciaObligatoria(materia.getTaAsistenciaObligatoria());
-            // Establecer otros campos según sea necesario
             return ResponseEntity.ok(materiaDTO);
         }
         return ResponseEntity.notFound().build();
     }
 
-    // Crear una nueva materia
     @PostMapping
     public ResponseEntity<MateriaDTO> createMateria(@RequestBody MateriaDTO materiaDTO) {
         MateriaDTO createdMateria = materiaService.crearMateria(materiaDTO);
         return ResponseEntity.status(201).body(createdMateria); // Código 201 para creación
     }
 
-    // Actualizar una materia existente
     @PutMapping("/{id}")
     public ResponseEntity<MateriaDTO> updateMateria(@PathVariable Integer id, @RequestBody MateriaDTO materiaDTO) {
         MateriaDTO updatedMateria = materiaService.actualizarMateria(id, materiaDTO);
         return updatedMateria != null ? ResponseEntity.ok(updatedMateria) : ResponseEntity.notFound().build();
     }
 
-    // Eliminar una materia
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMateria(@PathVariable Integer id) {
         if (materiaService.eliminarMateria(id)) {

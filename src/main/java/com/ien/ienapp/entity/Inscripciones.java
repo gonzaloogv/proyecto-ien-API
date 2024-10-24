@@ -60,7 +60,6 @@ public class Inscripciones {
 
     @Column(name = "fe_nacimiento", nullable = false)
     private Date feNacimiento;
-
     
     @Column(name = "fe_inscripcion", nullable = false)
     private Date feInscripcion;

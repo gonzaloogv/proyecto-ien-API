@@ -22,39 +22,35 @@ public class TemaController {
     @PostMapping
     public ResponseEntity<Tema> createTema(@RequestBody TemaDTO temaDTO) {
         if (temaDTO.getDeTitulo() == null || temaDTO.getDeDescripcion() == null || temaDTO.getFeRegistro() == null) {
-            return ResponseEntity.badRequest().body(null); // Bad Request si falta algún campo
+            return ResponseEntity.badRequest().body(null);
         }
-        
-        // Crear el nuevo tema a partir del DTO
+
         Tema tema = new Tema();
         tema.setDeTitulo(temaDTO.getDeTitulo());
         tema.setDeDescripcion(temaDTO.getDeDescripcion());
         tema.setFeRegistro(temaDTO.getFeRegistro());
 
-        Integer idMateria = temaDTO.getIdMateria(); // ID de materia opcional
+        Integer idMateria = temaDTO.getIdMateria(); 
         
         try {
             Tema createdTema = temaService.createTema(tema, idMateria);
             return ResponseEntity.status(HttpStatus.CREATED).body(createdTema);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Manejar caso de materia no encontrada
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
-    // Obtener un tema por su ID
     @GetMapping("/{id}")
     public ResponseEntity<Tema> getTemaById(@PathVariable Integer id) {
         Optional<Tema> tema = temaService.getTemaById(id);
         return tema.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
     }
 
-    // Listar todos los temas
     @GetMapping
     public ResponseEntity<Iterable<Tema>> getAllTemas() {
         return ResponseEntity.ok(temaService.getAllTemas());
     }
 
-    // Actualizar un tema por su ID
     @PutMapping("/{id}")
     public ResponseEntity<Tema> updateTema(@PathVariable Integer id, @RequestBody Map<String, Object> payload) {
         if (!payload.containsKey("deTitulo") || !payload.containsKey("deDescripcion")) {
@@ -68,18 +64,17 @@ public class TemaController {
             Tema updatedTema = temaService.updateTema(id, tema);
             return ResponseEntity.ok(updatedTema);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Tema no encontrado
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
-    // Eliminar un tema por su ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTema(@PathVariable Integer id) {
         try {
             temaService.deleteTema(id);
-            return ResponseEntity.noContent().build(); // Código 204, sin contenido
+            return ResponseEntity.noContent().build(); 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Tema no encontrado
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
         }
     }
 }

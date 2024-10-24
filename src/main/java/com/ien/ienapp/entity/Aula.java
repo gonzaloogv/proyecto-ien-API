@@ -31,17 +31,13 @@ public class Aula {
     @Temporal(TemporalType.TIMESTAMP)
     private Date feModificacion;
     
-    
     public Aula(){
     }
     
     public Aula(Integer id, Integer nuCapacidadMax, Date feRegistro, Date feModificacion){
-    
         this.pkAula = id;
         this.nuCapacidadMax = nuCapacidadMax;
         this.feRegistro = feRegistro;
         this.feModificacion = feModificacion;
-        
     }
-    
 }

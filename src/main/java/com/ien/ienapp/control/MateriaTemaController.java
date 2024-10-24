@@ -18,7 +18,6 @@ public class MateriaTemaController {
     @Autowired
     private MateriaTemaService materiaTemaService;
 
-    // Cambiar a @RequestBody para que reciba un JSON con los datos
     @PostMapping
     public ResponseEntity<String> crearRelacion(@RequestBody MateriaTemaDTO materiaTemaDTO) {
         try {

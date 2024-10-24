@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MateriaRepository extends JpaRepository<Materia, Integer> {
-    // Aquí puedes agregar métodos personalizados si es necesario
 }

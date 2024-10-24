@@ -37,13 +37,13 @@ public class EstadoCivilController {
 
     @PostMapping
     public EstadoCivil createEstadoCivil(@RequestBody EstadoCivil estadoCivil) {
-        return estadoCivilService.createEstadoCivil(estadoCivil);  // Se delega la creación al servicio
+        return estadoCivilService.createEstadoCivil(estadoCivil); 
     }
 
     @PutMapping("/{id}")
     public EstadoCivil updateEstadoCivil(@PathVariable Integer id, @RequestBody EstadoCivil estadoCivil) {
-        estadoCivil.setId(id);  // Asegúrate de establecer el ID en la entidad antes de actualizar
-        return estadoCivilService.createEstadoCivil(estadoCivil);  // Se reutiliza el mismo método para guardar o actualizar
+        estadoCivil.setId(id); 
+        return estadoCivilService.createEstadoCivil(estadoCivil);
     }
 
 

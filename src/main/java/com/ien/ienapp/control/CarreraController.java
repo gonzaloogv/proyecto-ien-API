@@ -24,7 +24,7 @@ public class CarreraController {
 
     @GetMapping
     public List<CarreraDTO> getAllCarreras() {
-        return carreraService.getAllCarreras(); // Aquí devuelves List<CarreraDTO>
+        return carreraService.getAllCarreras(); 
     }
 
     @GetMapping("/{id}")

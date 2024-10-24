@@ -41,5 +41,4 @@ public class DocumentacionAlumno {
     private Date feModificacion;
 
     public DocumentacionAlumno(){}
-    
 }

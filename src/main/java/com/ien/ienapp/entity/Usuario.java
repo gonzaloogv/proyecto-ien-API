@@ -46,5 +46,4 @@ public class Usuario {
     @Column(name = "fe_modificacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date feModificacion;
-    
 }

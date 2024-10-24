@@ -10,9 +10,8 @@ import java.util.Date;
 @Entity
 @Table(name = "alumnos")
 public class Alumno {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Autoincremental
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "nu_legajo", nullable = false)
@@ -29,25 +28,20 @@ public class Alumno {
     @Column(name = "nu_promedio_gral")
     private Double nuPromedioGral;
 
-    @Column(name = "ti_estado_inscripcion") // Corregido
-    private String tiEstadoInscripcion; // Corregido
+    @Column(name = "ti_estado_inscripcion") 
+    private String tiEstadoInscripcion; 
 
     @ManyToOne
-    @JoinColumn(name = "id_plan_estudio", nullable = false) // Relación con PlanEstudio
+    @JoinColumn(name = "id_plan_estudio", nullable = false) 
     private PlanesEstudios planesEstudios;
 
     @Column(name = "fe_registro", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP) // Ajustado para incluir tiempo
+    @Temporal(TemporalType.TIMESTAMP) 
     private Date feRegistro;
 
     @Column(name = "fe_modificacion")
-    @Temporal(TemporalType.TIMESTAMP) // Ajustado para incluir tiempo
+    @Temporal(TemporalType.TIMESTAMP)
     private Date feModificacion;
 
-    // Relación con la tabla rrhh
-    @ManyToOne
-    @JoinColumn(name = "id_rrhh", nullable = false) // nullable si quieres permitir nulos
-    private RRHH rrhh;
-
-    public Alumno() {} // Constructor vacío
+    public Alumno() {}
 }

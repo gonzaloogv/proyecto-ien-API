@@ -28,8 +28,5 @@ public class AlumnoDTO {
     @NotNull(message = "El plan de estudios es obligatorio")
     private Integer idPlanEstudio;
 
-    @NotNull(message = "El RRHH es obligatorio")
-    private Integer idRrhh;
-
     private Date feRegistro;
 }

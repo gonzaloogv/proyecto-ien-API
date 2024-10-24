@@ -41,5 +41,4 @@ public class Documentacion {
     private Date feModificacion;
 
     public Documentacion (){}
-    
 }

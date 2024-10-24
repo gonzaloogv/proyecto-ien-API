@@ -26,10 +26,9 @@ public class Profesor {
     private LocalDateTime feRegistro;
 
     @OneToOne
-    @JoinColumn(name = "Id", referencedColumnName = "Id") // Relación directa usando Id
+    @JoinColumn(name = "Id", referencedColumnName = "Id") 
     private RRHH rrhh;
 
-    // Getters y Setters
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 

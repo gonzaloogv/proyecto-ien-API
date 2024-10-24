@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class TemaDTO {
-    private Integer id; // ID del tema
+    private Integer id;
 
     @NotNull(message = "Title cannot be null")
     private String deTitulo;
@@ -18,7 +18,7 @@ public class TemaDTO {
     private String deDescripcion;
 
     @NotNull(message = "Registration date cannot be null")
-    private LocalDate feRegistro; // Fecha de registro
+    private LocalDate feRegistro;
 
-    private Integer idMateria; // ID de la materia, puede ser null si no se asocia a una
+    private Integer idMateria;
 }

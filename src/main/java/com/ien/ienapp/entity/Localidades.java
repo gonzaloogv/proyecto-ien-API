@@ -35,6 +35,5 @@ public class Localidades {
     @Column(name = "fe_modificacion")
     private LocalDate feModificacion;
 
-    // Getters y Setters
     public Localidades() {}
 }

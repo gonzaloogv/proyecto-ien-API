@@ -10,7 +10,7 @@ import java.util.Date;
 public class MateriaDTO {
     private Integer id;
     private String deNombre;
-    private Double taAsistenciaObligatoria; // Asegurado como Double
-    private Integer idCarrera; // ID de la carrera a la que pertenece
-    private Date feRegistro; // Fecha de registro
+    private Double taAsistenciaObligatoria; 
+    private Integer idCarrera; 
+    private Date feRegistro;
 }
