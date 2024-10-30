@@ -1,6 +1,5 @@
 package com.ien.ienapp.control;
 
-import com.ien.ienapp.dto.AlumnoDTO;
 import com.ien.ienapp.dto.RRHHDTO;
 import com.ien.ienapp.entity.Alumno;
 import com.ien.ienapp.service.AlumnoService;
@@ -43,22 +42,23 @@ public class AlumnoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AlumnoDTO> obtenerAlumno(@PathVariable Integer id) {
-        AlumnoDTO alumnoDTO = alumnoService.obtenerAlumnoPorId(id); // no hay Optional aquí
-        return ResponseEntity.ok(alumnoDTO); // no necesitas map
+    public ResponseEntity<RRHHDTO> obtenerAlumno(@PathVariable Integer id) {
+        Alumno alumno = alumnoService.obtenerAlumnoPorId(id); // Obtener el objeto Alumno
+        RRHHDTO rrhhDTO = alumnoService.convertirAAlumnoDTO(alumno); // Convertir Alumno a RRHHDTO
+        return ResponseEntity.ok(rrhhDTO);
     }
 
 
     @GetMapping
-    public ResponseEntity<List<AlumnoDTO>> obtenerTodosLosAlumnos() {
-        List<AlumnoDTO> alumnos = alumnoService.obtenerTodosLosAlumnos();
+    public ResponseEntity<List<RRHHDTO>> obtenerTodosLosAlumnos() {
+        List<RRHHDTO> alumnos = alumnoService.obtenerTodosLosAlumnos();
         return ResponseEntity.ok(alumnos);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> actualizarAlumno(@PathVariable Integer id, @RequestBody AlumnoDTO alumnoDTO) {
+    public ResponseEntity<String> actualizarAlumno(@PathVariable Integer id, @RequestBody RRHHDTO rrhhDTO) {
         try {
-            alumnoService.actualizarAlumno(id, alumnoDTO);
+            alumnoService.actualizarAlumno(id, rrhhDTO);
             return ResponseEntity.ok("Alumno actualizado exitosamente.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al actualizar el alumno: " + e.getMessage());

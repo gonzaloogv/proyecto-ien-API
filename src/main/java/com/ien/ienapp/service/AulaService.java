@@ -1,81 +1,70 @@
-
 package com.ien.ienapp.service;
 
+import com.ien.ienapp.dto.ComisionDetalleDTO;
 import com.ien.ienapp.entity.Aula;
-import com.ien.ienapp.repository.IAulaRepository;
-import javax.persistence.EntityNotFoundException;
-import java.util.Date;
-import java.util.List;
+import com.ien.ienapp.exception.ResourceNotFoundException;
+import com.ien.ienapp.repository.AulaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class AulaService implements IAulaService {
-    
+public class AulaService {
+
     @Autowired
-    private IAulaRepository aulaRepo;
+    private AulaRepository aulaRepository;
 
-    @Override
-    public List<Aula> getAula() {
-    
-         List<Aula> listarAulas = aulaRepo.findAll();
-        
-         return listarAulas;
-    
+    public AulaService(AulaRepository aulaRepository) {
+        this.aulaRepository = aulaRepository;
     }
 
-    @Override
-    public void saveAula(Aula au) {
-        if (au.getFeRegistro() == null) {
-            au.setFeRegistro(new Date()); 
+    public Aula crearAula(ComisionDetalleDTO comisionDetalleDTO) {
+        Aula aula = new Aula();
+        aula.setIdAula(comisionDetalleDTO.getIdAula());
+        aula.setNuCapacidadMax(comisionDetalleDTO.getNuCapacidadMax());
+        aula.setFeRegistro(comisionDetalleDTO.getFeRegistro());
+        aula.setFeModificacion(comisionDetalleDTO.getFeModificacion());
+        return aulaRepository.save(aula);
+    }
+    
+    public List<ComisionDetalleDTO> obtenerAulas() {
+        return aulaRepository.findAll().stream()
+                .map(this::convertirAulaDTO)
+                .collect(Collectors.toList());
+    }
+
+    public Aula obtenerAulasPorId(Integer id) {
+        return aulaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Aula inexistente"));
+    }   
+    
+        
+    public Aula actualizarAula(Integer id, ComisionDetalleDTO comisionDetalleDTO) {
+        if (aulaRepository.existsById(id)) {
+            Aula aula = new Aula();
+            aula.setIdAula(id);
+            aula.setNuCapacidadMax(comisionDetalleDTO.getNuCapacidadMax());
+            aula.setFeModificacion(comisionDetalleDTO.getFeModificacion());
+            return aulaRepository.save(aula);
         }
-        au.setFeModificacion(new Date()); 
-        aulaRepo.save(au);
+        throw new ResourceNotFoundException("Aula no encontrada");
+    }   
+
+    public void eliminarAula(Integer id) {
+        if (aulaRepository.existsById(id)) {
+            aulaRepository.deleteById(id);
+        } else {
+            throw new ResourceNotFoundException("Aula no encontrada");
+        }
     }
 
-
-    @Override
-    public void deleteAula(Long id) {
-          aulaRepo.deleteById(id);    
+    public ComisionDetalleDTO convertirAulaDTO(Aula aula) {
+        ComisionDetalleDTO dto = new ComisionDetalleDTO();
+        dto.setIdAula(aula.getIdAula());
+        dto.setNuCapacidadMax(aula.getNuCapacidadMax());
+        dto.setFeRegistro(aula.getFeRegistro());
+        return dto;
     }
-    
-    @Override
-    public Aula buscarAula(Long id) {
-          
-                Aula au = aulaRepo.findById(id).orElse(null);
-        
-                return au;
-    
-    }
-
-    @Override
-    public void editAula(Long id, Integer nuCapacidadMax, Date feRegistro, Date feModificacion) {
-
-        Aula au = this.buscarAula(id);
-
-   
-    if (au != null) {
-       
-        au.setNuCapacidadMax(nuCapacidadMax);
-        au.setFeRegistro(feRegistro);
-        au.setFeModificacion(feModificacion);
-        
-        
-        this.saveAula(au);
-
-
-    }
-    else {
-        
-        throw new EntityNotFoundException("Aula no encontrada con ID: " + id);
-    }
-    
-    
-    
-    }
-
-   
 }

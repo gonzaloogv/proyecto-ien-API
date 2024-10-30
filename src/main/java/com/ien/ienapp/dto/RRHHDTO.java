@@ -64,8 +64,26 @@ public class RRHHDTO {
     private Date feNacimiento;
 
     private Date feRegistro;
+
     private Date feModificacion;
 
     //alumnos
-    
+    private String nuLegajo;
+
+    private Date feIngreso;
+
+    private Date feEgreso;
+
+    private Double nuPromedioGral;
+
+    private String tiEstadoInscripcion;
+
+    private Integer idPlanEstudio;
+
+    //profesor
+
+    private String nuMatricula;
+
+    private Date feBaja;
+
 }

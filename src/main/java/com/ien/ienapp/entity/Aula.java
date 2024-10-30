@@ -15,10 +15,9 @@ import lombok.Setter;
 @Setter @Getter
 @Table(name = "aulas")
 public class Aula {
-    
     @Id
     @Column(name = "Id")
-    private Integer pkAula;
+    private Integer idAula;
 
     @Column(name = "nu_capacidad_max", nullable = false)
     private Integer nuCapacidadMax;
@@ -31,13 +30,5 @@ public class Aula {
     @Temporal(TemporalType.TIMESTAMP)
     private Date feModificacion;
     
-    public Aula(){
-    }
-    
-    public Aula(Integer id, Integer nuCapacidadMax, Date feRegistro, Date feModificacion){
-        this.pkAula = id;
-        this.nuCapacidadMax = nuCapacidadMax;
-        this.feRegistro = feRegistro;
-        this.feModificacion = feModificacion;
-    }
+    public Aula() {};
 }

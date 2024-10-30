@@ -1,6 +1,4 @@
-
 package com.ien.ienapp.entity;
-
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,13 +15,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Setter @Getter
+@Getter
+@Setter
 @Table(name = "horarios")
-public class Horario {
-    
+public class Horario {   
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer pkHorario;
+    @Column(name = "Id")
+    private Integer idHorario;
 
     @Column(name = "hr_inicio", nullable = false)
     private LocalTime hrInicio;
@@ -43,4 +42,5 @@ public class Horario {
     private Date feModificacion;
     
     public Horario(){}
+    
 }

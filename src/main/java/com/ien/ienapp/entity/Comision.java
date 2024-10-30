@@ -18,7 +18,7 @@ public class Comision {
     
     @Id
     @Column(name = "Id")
-    private Integer pkComision;
+    private Integer idComision;
 
     @Column(name = "de_descripcion", nullable = false)
     private String deDescripcion;
@@ -32,8 +32,8 @@ public class Comision {
     @Column(name = "de_carrera", nullable = false)
     private String deCarrera;
 
-    @Column(name = "de_anio_de_materia", nullable = false)
-    private String deAnioDeMateria;
+    @Column(name = "nu_anio_de_materia", nullable = false)
+    private String nuAnioDeMateria;
 
     @Column(name = "fe_registro", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)

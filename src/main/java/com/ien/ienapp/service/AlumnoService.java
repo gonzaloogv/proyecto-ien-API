@@ -1,11 +1,11 @@
 package com.ien.ienapp.service;
 
-import com.ien.ienapp.dto.AlumnoDTO;
+import com.ien.ienapp.dto.RRHHDTO;
 import com.ien.ienapp.entity.Alumno;
 import com.ien.ienapp.entity.PlanesEstudios;
-
 import com.ien.ienapp.exception.ResourceNotFoundException;
 import com.ien.ienapp.repository.AlumnoRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,17 +25,18 @@ public class AlumnoService {
         this.alumnoRepository = alumnoRepository;
     }
 
-    public Alumno crearAlumno(AlumnoDTO alumnoDTO) {
+    public Alumno crearAlumno(RRHHDTO rrhhDTO) {
         Alumno alumno = new Alumno();
-        alumno.setNuLegajo(alumnoDTO.getNuLegajo());
-        alumno.setFeIngreso(alumnoDTO.getFeIngreso());
-        alumno.setFeEgreso(alumnoDTO.getFeEgreso());
-        alumno.setNuPromedioGral(alumnoDTO.getNuPromedioGral());
-        alumno.setTiEstadoInscripcion(alumnoDTO.getTiEstadoInscripcion());
-        alumno.setFeRegistro(alumnoDTO.getFeRegistro());
+        alumno.setId(rrhhDTO.getId());
+        alumno.setNuLegajo(rrhhDTO.getNuLegajo());
+        alumno.setFeIngreso(rrhhDTO.getFeIngreso());
+        alumno.setFeEgreso(rrhhDTO.getFeEgreso());
+        alumno.setNuPromedioGral(rrhhDTO.getNuPromedioGral());
+        alumno.setTiEstadoInscripcion(rrhhDTO.getTiEstadoInscripcion());
+        alumno.setFeRegistro(rrhhDTO.getFeRegistro());
 
-        if (alumnoDTO.getIdPlanEstudio() != null) {
-            PlanesEstudios planesEstudios = planesEstudioService.getPlanesEstudiosById(alumnoDTO.getIdPlanEstudio())
+        if (rrhhDTO.getIdPlanEstudio() != null) {
+            PlanesEstudios planesEstudios = planesEstudioService.getPlanesEstudiosById(rrhhDTO.getIdPlanEstudio())
                     .orElseThrow(() -> new ResourceNotFoundException("Plan de estudios no encontrado"));
             alumno.setPlanesEstudios(planesEstudios);
         }
@@ -43,31 +44,30 @@ public class AlumnoService {
         return alumnoRepository.save(alumno);
     }
 
-    public List<AlumnoDTO> obtenerTodosLosAlumnos() {
+    public List<RRHHDTO> obtenerTodosLosAlumnos() {
         return alumnoRepository.findAll().stream()
                 .map(this::convertirAAlumnoDTO)
                 .collect(Collectors.toList());
     }
 
-    public AlumnoDTO obtenerAlumnoPorId(Integer id) {
+    public Alumno obtenerAlumnoPorId(Integer id) {
         return alumnoRepository.findById(id)
-                .map(this::convertirAAlumnoDTO)
                 .orElseThrow(() -> new ResourceNotFoundException("Alumno no encontrado"));
     }    
 
-    public Alumno actualizarAlumno(Integer id, AlumnoDTO alumnoDTO) {
+    public Alumno actualizarAlumno(Integer id, RRHHDTO rrhhDTO) {
         if (alumnoRepository.existsById(id)) {
             Alumno alumno = new Alumno();
             alumno.setId(id);
-            alumno.setNuLegajo(alumnoDTO.getNuLegajo());
-            alumno.setFeIngreso(alumnoDTO.getFeIngreso());
-            alumno.setFeEgreso(alumnoDTO.getFeEgreso());
-            alumno.setNuPromedioGral(alumnoDTO.getNuPromedioGral());
-            alumno.setTiEstadoInscripcion(alumnoDTO.getTiEstadoInscripcion());
-            alumno.setFeRegistro(alumnoDTO.getFeRegistro());
+            alumno.setNuLegajo(rrhhDTO.getNuLegajo());
+            alumno.setFeIngreso(rrhhDTO.getFeIngreso());
+            alumno.setFeEgreso(rrhhDTO.getFeEgreso());
+            alumno.setNuPromedioGral(rrhhDTO.getNuPromedioGral());
+            alumno.setTiEstadoInscripcion(rrhhDTO.getTiEstadoInscripcion());
+            alumno.setFeModificacion(rrhhDTO.getFeModificacion());
 
-            if (alumnoDTO.getIdPlanEstudio() != null) {
-                PlanesEstudios planesEstudios = planesEstudioService.getPlanesEstudiosById(alumnoDTO.getIdPlanEstudio())
+            if (rrhhDTO.getIdPlanEstudio() != null) {
+                PlanesEstudios planesEstudios = planesEstudioService.getPlanesEstudiosById(rrhhDTO.getIdPlanEstudio())
                         .orElseThrow(() -> new ResourceNotFoundException("Plan de estudios no encontrado"));
                 alumno.setPlanesEstudios(planesEstudios);
             }
@@ -84,8 +84,8 @@ public class AlumnoService {
         }
     }
 
-    private AlumnoDTO convertirAAlumnoDTO(Alumno alumno) {
-        AlumnoDTO dto = new AlumnoDTO();
+    public RRHHDTO convertirAAlumnoDTO(Alumno alumno) {
+        RRHHDTO dto = new RRHHDTO();
         dto.setId(alumno.getId());
         dto.setNuLegajo(alumno.getNuLegajo());
         dto.setFeIngreso(alumno.getFeIngreso());
