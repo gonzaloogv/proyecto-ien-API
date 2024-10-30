@@ -4,8 +4,6 @@ package com.ien.ienapp.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,11 +18,7 @@ public class Administrativo {
     
     @Id
     @Column(name = "Id")
-    private Integer pkAdministrativo;
-
-    @ManyToOne
-    @JoinColumn(name = "fk_ad_rrhh", nullable = false)
-    private RRHH rrhh;
+    private Integer id;
 
     @Column(name = "fe_ingreso")
     @Temporal(TemporalType.TIMESTAMP)
