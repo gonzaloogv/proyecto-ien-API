@@ -86,4 +86,15 @@ public class RRHHDTO {
 
     private Date feBaja;
 
+    // profesor materia
+
+    private Integer idMateria;
+
+    private String tiCargo;
+
+    // profesor titulo
+
+    private Integer idTitulo;
+
+    private String reImagenTitulo;
 }

@@ -4,10 +4,12 @@ import com.ien.ienapp.dto.RRHHDTO;
 import com.ien.ienapp.entity.CategoriaRrhh;
 import com.ien.ienapp.entity.EstadoCivil;
 import com.ien.ienapp.entity.Localidades;
+import com.ien.ienapp.entity.Profesor;
 import com.ien.ienapp.entity.RRHH;
 import com.ien.ienapp.repository.CategoriaRrhhRepository;
 import com.ien.ienapp.repository.EstadoCivilRepository;
 import com.ien.ienapp.repository.LocalidadesRepository;
+import com.ien.ienapp.repository.ProfesorRepository;
 import com.ien.ienapp.repository.RRHHRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,9 @@ import java.util.Optional;
 
 @Service
 public class RRHHService {
+
+    @Autowired
+    private ProfesorRepository profesorRepository;
 
     @Autowired
     private RRHHRepository rrhhRepository;
@@ -53,6 +58,10 @@ public class RRHHService {
         dto.setFeRegistro(rrhh.getFeRegistro());
         dto.setFeModificacion(rrhh.getFeModificacion());
         return dto;
+    }
+
+    public Optional<Profesor> getProfesorById(Integer id) {
+        return profesorRepository.findById(id); // Suponiendo que tienes un repositorio para Profesor
     }
 
     // Convertir RRHHDTO a RRHH
