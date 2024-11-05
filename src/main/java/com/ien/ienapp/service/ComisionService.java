@@ -67,6 +67,7 @@ public class ComisionService {
         dto.setIdComision(comision.getIdComision());
         dto.setDeDescripcion(comision.getDeDescripcion());
         dto.setNuCodigoComision(comision.getNuCodigoComision());
+        dto.setDeCarrera(comision.getDeCarrera());
         dto.setNuAnioComision(comision.getNuAnioComision());
         dto.setFeRegistro(comision.getFeRegistro());
         return dto;
