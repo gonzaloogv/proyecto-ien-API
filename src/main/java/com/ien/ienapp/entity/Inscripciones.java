@@ -4,12 +4,11 @@ import java.math.BigInteger;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,19 +20,24 @@ import lombok.Setter;
 @Getter @Setter
 @Table(name = "inscripciones")
 public class Inscripciones {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+
+    @EmbeddedId
+    private InscripcionesId id;  // Usamos la clave primaria compuesta como un objeto
 
     @ManyToOne
+    @MapsId("idAlumno") 
     @JoinColumn(name = "id_alumno", nullable = false)
     private Alumno alumno;
 
     @ManyToOne
+    @MapsId("idCarrera") 
     @JoinColumn(name = "id_carrera", nullable = false)
     private Carrera carrera;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "id_plan_estudio")
+    private PlanesEstudios planesEstudios;
+
     @Column(name = "nu_dni", nullable = false)
     private Integer nuDni;
 
@@ -42,7 +46,7 @@ public class Inscripciones {
 
     @Column(name = "de_apellido", nullable = false)
     private String deApellido;
-    
+
     @Column(name = "nu_celular", nullable = false)
     private BigInteger nuCelular;
 
@@ -60,15 +64,11 @@ public class Inscripciones {
 
     @Column(name = "fe_nacimiento", nullable = false)
     private Date feNacimiento;
-    
+
     @Column(name = "fe_inscripcion", nullable = false)
     private Date feInscripcion;
 
-    @ManyToOne
-    @JoinColumn(name = "id_plan_estudio")
-    private PlanesEstudios planesEstudios;
-
-     @Column(name = "fe_registro", nullable = false)
+    @Column(name = "fe_registro", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date feRegistro;
 
@@ -77,4 +77,5 @@ public class Inscripciones {
     private Date feModificacion;
 
     public Inscripciones() {}
+
 }

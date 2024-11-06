@@ -4,7 +4,8 @@ package com.ien.ienapp.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -14,7 +15,6 @@ import javax.persistence.Column;
 import javax.persistence.GenerationType;
 
 import java.sql.Date;
-import java.util.List;
 
 @Entity
 @Getter
@@ -29,8 +29,10 @@ public class Rol {
     @Column(name = "de_rol", nullable = false)
     private String deRol;
 
-    @ManyToMany(mappedBy = "roles")
-    private List<Operacion> operaciones;
+    @ManyToOne
+    @JoinColumn(name = "operacion_id")
+    private Operacion operacion;
+
 
     @Column(name = "fe_registro", nullable = false)
     private Date feRegistro;

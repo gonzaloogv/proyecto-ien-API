@@ -3,10 +3,11 @@ package com.ien.ienapp.entity;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,12 +19,18 @@ import lombok.Setter;
 @Getter @Setter
 @Table(name = "profesores_titulos")
 public class ProfesoresTitulos {
-    @Id
-    private Integer id;
+    @EmbeddedId
+    private ProfesoresTitulosId id; 
 
     @ManyToOne
-    @JoinColumn(name = "id_titulo", nullable = false) 
+    @MapsId("idTitulo") 
+    @JoinColumn(name = "id_titulo", nullable = false)
     private Titulos titulos;
+
+    @ManyToOne
+    @MapsId("idProfesor") 
+    @JoinColumn(name = "id_profesor", nullable = false)
+    private Profesor profesor;
 
     @Column(name = "re_imagen_titulo")
     private String reImagenTitulo;

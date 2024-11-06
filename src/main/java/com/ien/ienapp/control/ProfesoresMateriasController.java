@@ -26,12 +26,18 @@ public class ProfesoresMateriasController {
         return profesoresMateriasService.obtenerProfesoresMaterias();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ProfesoresDTO> obtenerProfesoresMateriasPorId(@PathVariable Integer id) {
-        Optional<ProfesoresMaterias> profesoresMaterias = profesoresMateriasService.obtenerProfesoresMateriasPorId(id);
-        return profesoresMaterias.map(value -> ResponseEntity.ok(profesoresMateriasService.convertirProfesoresMateriasDTO(value)))
+    @GetMapping("/{idProfesor}/{idMateria}")
+    public ResponseEntity<ProfesoresDTO> obtenerProfesoresMateriasPorId(
+            @PathVariable Integer idProfesor,
+            @PathVariable Integer idMateria) {
+        
+        Optional<ProfesoresMaterias> profesoresMaterias = profesoresMateriasService.obtenerProfesoresMateriasPorId(idProfesor, idMateria);
+        
+        return profesoresMaterias
+                .map(value -> ResponseEntity.ok(profesoresMateriasService.convertirProfesoresMateriasDTO(value)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+    
 
     @PostMapping
     public ResponseEntity<?> crearProfesoresMaterias(@Valid @RequestBody ProfesoresDTO profesorDTO, BindingResult result) {
@@ -50,10 +56,10 @@ public class ProfesoresMateriasController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteProfesoresMaterias(@PathVariable Integer id) {
+    @DeleteMapping("/{idProfesor}/{idMateria}")
+    public ResponseEntity<?> deleteProfesoresMaterias(@PathVariable Integer idProfesor, @PathVariable Integer idMateria) {
         try {
-            profesoresMateriasService.eliminarProfesoresMaterias(id);
+            profesoresMateriasService.eliminarProfesoresMaterias(idProfesor, idMateria);
             return ResponseEntity.ok().build();
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body("Error al eliminar ProfesoresMaterias: " + e.getMessage());

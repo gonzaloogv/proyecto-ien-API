@@ -23,7 +23,7 @@ import lombok.Setter;
 public class Examen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer pkExamen;
+    private Integer id;
 
     @Column(name = "nu_nota", nullable = false)
     private Double nuNota;

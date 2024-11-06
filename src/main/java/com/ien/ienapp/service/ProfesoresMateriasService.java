@@ -29,25 +29,21 @@ public class ProfesoresMateriasService {
 
     public ProfesoresMaterias crearProfesoresMaterias(ProfesoresDTO profesoresDTO) {
         ProfesoresMaterias profesoresMaterias = new ProfesoresMaterias();
-        
-        // Crear el ID de ProfesoresMaterias
+
         ProfesoresMateriasId id = new ProfesoresMateriasId();
         id.setIdProfesor(profesoresDTO.getIdProfesor());
         id.setIdMateria(profesoresDTO.getIdMateria()); // Asegúrate de que este valor no sea null
 
-        // Setear el ID en el objeto de ProfesoresMaterias
         profesoresMaterias.setId(id);
 
-        // Obtener el objeto Profesor
+
         Profesor profesor = rrhhService.getProfesorById(profesoresDTO.getIdProfesor())
                 .orElseThrow(() -> new ResourceNotFoundException("Profesor no encontrado"));
-        
-        // Setear el objeto Profesor en ProfesoresMaterias
+
         profesoresMaterias.setProfesor(profesor);
         profesoresMaterias.setTiCargo(profesoresDTO.getTiCargo());
         profesoresMaterias.setFeRegistro(profesoresDTO.getFeRegistro());
 
-        // Obtener el objeto Materia
         if (profesoresDTO.getIdMateria() != null) {
             Materia materia = materiaService.obtenerMateriaPorId(profesoresDTO.getIdMateria())
                     .orElseThrow(() -> new ResourceNotFoundException("Materia no encontrada"));
@@ -58,28 +54,32 @@ public class ProfesoresMateriasService {
     }
 
 
-    public ProfesoresMaterias actualizarProfesoresMaterias(Integer id, ProfesoresDTO profesoresDTO) {
+    public ProfesoresMaterias actualizarProfesoresMaterias(Integer idProfesor, Integer idMateria, ProfesoresDTO profesoresDTO) {
+        // Crear una instancia de ProfesoresMateriasId usando los IDs de profesor y materia
+        ProfesoresMateriasId id = new ProfesoresMateriasId(idProfesor, idMateria);
+    
         if (profesoresMateriasRepository.existsById(id)) {
             ProfesoresMaterias profesoresMaterias = profesoresMateriasRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Profesor-Materia no encontrado"));
-
+    
             // Buscar el profesor por ID y setearlo
             profesoresMaterias.setProfesor(rrhhService.getProfesorById(profesoresDTO.getIdProfesor())
                     .orElseThrow(() -> new ResourceNotFoundException("Profesor no encontrado")));
             
             profesoresMaterias.setTiCargo(profesoresDTO.getTiCargo());
             profesoresMaterias.setFeModificacion(profesoresDTO.getFeModificacion());
-
+    
             if (profesoresDTO.getIdMateria() != null) {
                 Materia materia = materiaService.obtenerMateriaPorId(profesoresDTO.getIdMateria())
                         .orElseThrow(() -> new ResourceNotFoundException("Materia no encontrada"));
                 profesoresMaterias.setMateria(materia);
             }
-
+    
             return profesoresMateriasRepository.save(profesoresMaterias);
         }
         throw new ResourceNotFoundException("Profesor-Materia no encontrado");
     }
+    
 
     public List<ProfesoresDTO> obtenerProfesoresMaterias() {
         return profesoresMateriasRepository.findAll().stream()
@@ -87,17 +87,21 @@ public class ProfesoresMateriasService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<ProfesoresMaterias> obtenerProfesoresMateriasPorId(Integer id) {
+    public Optional<ProfesoresMaterias> obtenerProfesoresMateriasPorId(Integer idProfesor, Integer idMateria) {
+        ProfesoresMateriasId id = new ProfesoresMateriasId(idProfesor, idMateria);
         return profesoresMateriasRepository.findById(id);
     }
+    
 
-    public void eliminarProfesoresMaterias(Integer id) {
+    public void eliminarProfesoresMaterias(Integer idProfesor, Integer idMateria) {
+        ProfesoresMateriasId id = new ProfesoresMateriasId(idProfesor, idMateria);
         if (profesoresMateriasRepository.existsById(id)) {
             profesoresMateriasRepository.deleteById(id);
         } else {
             throw new ResourceNotFoundException("Profesor-Materia no encontrado");
         }
     }
+    
 
     public ProfesoresDTO convertirProfesoresMateriasDTO(ProfesoresMaterias profesoresMaterias) {
         ProfesoresDTO dto = new ProfesoresDTO();

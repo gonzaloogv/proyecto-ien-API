@@ -19,7 +19,7 @@ public class Modulo {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer pkModulo;
+    private Integer id;
 
     @Column(name = "de_modulo", nullable = false)
     private String deModulo;
