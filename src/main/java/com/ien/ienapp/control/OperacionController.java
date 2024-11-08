@@ -17,13 +17,11 @@ public class OperacionController {
     @Autowired
     private OperacionService operacionService;
 
-    // Obtener todas las operaciones
     @GetMapping
     public List<OperacionDTO> getAllOperaciones() {
         return operacionService.obtenerTodasLasOperaciones();
     }
 
-    // Obtener una operación por ID
     @GetMapping("/{id}")
     public ResponseEntity<OperacionDTO> getOperacion(@PathVariable Integer id) {
         Optional<OperacionDTO> optionalOperacion = operacionService.obtenerOperacionPorId(id);
@@ -34,14 +32,12 @@ public class OperacionController {
         return ResponseEntity.notFound().build();
     }
 
-    // Crear una nueva operación
     @PostMapping
     public ResponseEntity<OperacionDTO> createOperacion(@RequestBody OperacionDTO operacionDTO) {
         OperacionDTO createdOperacion = operacionService.crearOperacion(operacionDTO);
-        return ResponseEntity.status(201).body(createdOperacion); // Código 201 para creación
+        return ResponseEntity.status(201).body(createdOperacion); 
     }
 
-    // Actualizar una operación existente
     @PutMapping("/{id}")
     public ResponseEntity<OperacionDTO> updateOperacion(@PathVariable Integer id, @RequestBody OperacionDTO operacionDTO) {
         Optional<OperacionDTO> updatedOperacion = operacionService.actualizarOperacion(id, operacionDTO);
@@ -49,7 +45,7 @@ public class OperacionController {
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build()); 
     }
-    // Eliminar una operación
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteOperacion(@PathVariable Integer id) {
         if (operacionService.eliminarOperacion(id)) {

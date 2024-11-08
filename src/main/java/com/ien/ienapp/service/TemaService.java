@@ -16,21 +16,20 @@ import java.util.Optional;
 public class TemaService {
 
     @Autowired
-    private TemaRepository temaRepository; // Repositorio para manejar los temas
+    private TemaRepository temaRepository; 
 
     @Autowired
-    private MateriaTemaRepository materiaTemaRepository; // Repositorio para manejar la tabla intermedia
+    private MateriaTemaRepository materiaTemaRepository; 
 
     @Autowired
-    private MateriaRepository materiaRepository; // Repositorio para manejar las materias
+    private MateriaRepository materiaRepository; 
 
     public Optional<Tema> getTemaById(Integer id) {
-        return temaRepository.findById(id); // Utiliza el repositorio para buscar por ID
+        return temaRepository.findById(id); 
     }
     
-    // Método para crear un nuevo tema y la relación con la materia
     public Tema createTema(Tema tema, Integer idMateria) {
-        Tema savedTema = temaRepository.save(tema); // Guardar el tema
+        Tema savedTema = temaRepository.save(tema); 
         if (idMateria != null) {
             Optional<Materia> optionalMateria = materiaRepository.findById(idMateria);
             if (!optionalMateria.isPresent()) {
@@ -45,23 +44,21 @@ public class TemaService {
             materiaTema.setTema(savedTema);
             materiaTema.setMateria(optionalMateria.get());
     
-            materiaTemaRepository.save(materiaTema); // Guardar la relación
+            materiaTemaRepository.save(materiaTema); 
         }
     
         return savedTema;
     }    
 
-    // Método para eliminar un tema por su ID
+
     public void deleteTema(Integer id) {
         temaRepository.deleteById(id);
     }
 
-    // Método para listar todos los temas
     public Iterable<Tema> getAllTemas() {
         return temaRepository.findAll();
     }
 
-    // Método para actualizar un tema por su ID
     public Tema updateTema(Integer id, Tema temaDetails) {
         Optional<Tema> temaOptional = temaRepository.findById(id);
         if (temaOptional.isPresent()) {

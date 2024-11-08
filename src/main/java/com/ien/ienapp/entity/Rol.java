@@ -4,8 +4,6 @@ package com.ien.ienapp.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -28,11 +26,6 @@ public class Rol {
 
     @Column(name = "de_rol", nullable = false)
     private String deRol;
-
-    @ManyToOne
-    @JoinColumn(name = "operacion_id")
-    private Operacion operacion;
-
 
     @Column(name = "fe_registro", nullable = false)
     private Date feRegistro;

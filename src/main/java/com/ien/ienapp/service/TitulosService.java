@@ -23,7 +23,6 @@ public class TitulosService {
         this.titulosRepository = titulosRepository;
     }
 
-    // Método para crear un título desde ProfesoresDTO
     public Titulos crearTitulo(ProfesoresDTO profesoresDTO) {
         Titulos titulos = new Titulos();
         titulos.setId(profesoresDTO.getIdTitulo());
@@ -33,19 +32,16 @@ public class TitulosService {
         return titulosRepository.save(titulos);
     }
 
-    // Método para obtener todos los títulos como ProfesoresDTO
     public List<ProfesoresDTO> obtenerTitulos() {
         return titulosRepository.findAll().stream()
                 .map(this::convertirTitulosAProfesorDTO)
                 .collect(Collectors.toList());
     }
 
-    // Método para obtener un título por su ID
     public Optional<Titulos> obtenerTitulosPorId(Integer id) {
         return titulosRepository.findById(id);
     }
 
-    // Método para actualizar un título
     public Titulos actualizarTitulo(Integer id, ProfesoresDTO profesoresDTO) {
         if (titulosRepository.existsById(id)) {
             Titulos titulos = new Titulos();
@@ -57,7 +53,6 @@ public class TitulosService {
         throw new ResourceNotFoundException("Titulo no encontrado");
     }
 
-    // Método para eliminar un título
     public void eliminarTitulo(Integer id) {
         if (titulosRepository.existsById(id)) {
             titulosRepository.deleteById(id);
@@ -66,14 +61,13 @@ public class TitulosService {
         }
     }
 
-    // Método para convertir Titulos a ProfesoresDTO
     public ProfesoresDTO convertirTitulosAProfesorDTO(Titulos titulos) {
         ProfesoresDTO dto = new ProfesoresDTO();
         dto.setIdTitulo(titulos.getId());
         dto.setDeTitulo(titulos.getDeTitulo());
         dto.setFeRegistro(titulos.getFeRegistro());
         dto.setFeModificacion(titulos.getFeModificacion());
-        // Aquí puedes agregar otros campos si es necesario (por ejemplo, imagen del título o cargo del profesor)
+
         return dto;
     }
 }

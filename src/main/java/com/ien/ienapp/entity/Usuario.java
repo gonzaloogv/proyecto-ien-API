@@ -17,16 +17,15 @@ import lombok.Setter;
 @Setter @Getter
 @Table(name = "usuarios")
 public class Usuario {
-    
     @Id
     @Column(name = "Id")
-    private Integer pkUsuario;
+    private Integer id;
 
     @Column(name = "de_nombre_cuenta", nullable = false)
     private String deNombreCuenta;
 
-    @Column(name = "de_contraseña", nullable = false)
-    private String deContraseña;
+    @Column(name = "de_contrasenia", nullable = false)
+    private String deContrasenia;
 
     @ManyToOne
     @JoinColumn(name = "id_rrhh", nullable = false)
