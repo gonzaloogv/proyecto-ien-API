@@ -63,11 +63,15 @@ public class RRHHDTO {
     @NotNull(message = "La fecha de nacimiento es obligatoria")
     private Date feNacimiento;
 
+    @NotNull(message = "La fecha de registro es obligatoria")
     private Date feRegistro;
 
     private Date feModificacion;
 
     //alumnos
+    @NotNull(message = "El número de legajo es obligatorio")
+    @Min(value = 1000000, message = "El número de legajo debe tener al menos 6 dígitos")
+    @Max(value = 999999999999999L, message = "El número de legajo no puede tener más de 15 dígitos")
     private String nuLegajo;
 
     private Date feIngreso;
@@ -75,9 +79,11 @@ public class RRHHDTO {
     private Date feEgreso;
 
     private Double nuPromedioGral;
-
+    
+    @NotBlank(message = "El estado de inscripcion tiene que ser obligatorio")
     private String tiEstadoInscripcion;
 
+    @NotNull(message = "El ID plan de estudio es obligatorio")
     private Integer idPlanEstudio;
 
     //profesor
