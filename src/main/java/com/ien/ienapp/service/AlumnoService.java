@@ -78,6 +78,9 @@ public class AlumnoService {
 
     public void eliminarAlumno(Integer id) {
         if (alumnoRepository.existsById(id)) {
+            // Eliminar inscripciones asociadas
+    
+            // Eliminar al alumno
             alumnoRepository.deleteById(id);
         } else {
             throw new ResourceNotFoundException("Alumno no encontrado");

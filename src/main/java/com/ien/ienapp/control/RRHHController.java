@@ -49,10 +49,18 @@ public class RRHHController {
     public ResponseEntity<?> createRRHH(@Valid @RequestBody RRHHDTO rrhhDTO, BindingResult result) {
         if (result.hasErrors()) {
             List<String> errors = result.getFieldErrors().stream()
+                    .filter(fieldError -> !fieldError.getField().startsWith("nuLegajo") &&
+                                           !fieldError.getField().startsWith("tiEstadoInscripcion") &&
+                                           !fieldError.getField().startsWith("idPlanEstudio") &&
+                                           !fieldError.getField().startsWith("nuMatricula") &&
+                                           !fieldError.getField().startsWith("idMateria") &&
+                                           !fieldError.getField().startsWith("idTitulo"))
                     .map(fieldError -> fieldError.getDefaultMessage()) // Obtiene el mensaje de cada error
                     .collect(Collectors.toList());
 
-            return ResponseEntity.badRequest().body(errors);
+            if (!errors.isEmpty()) {
+                return ResponseEntity.badRequest().body(errors);
+            }
         }
 
         RRHH rrhh = rrhhService.convertToEntity(rrhhDTO);

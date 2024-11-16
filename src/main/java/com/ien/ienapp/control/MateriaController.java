@@ -19,10 +19,12 @@ public class MateriaController {
     private MateriaService materiaService;
 
     @GetMapping
-    public List<MateriaDTO> getAllMaterias() {
+    public List<MateriaDTO> getAllMaterias(@RequestParam(required = false) Integer carreraId) {
+        if (carreraId != null) {
+            return materiaService.getMateriasByCarreraId(carreraId);
+        }
         return materiaService.getAllMaterias();
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<MateriaDTO> getMateria(@PathVariable Integer id) {
         Optional<Materia> optionalMateria = materiaService.obtenerMateriaPorId(id);
@@ -34,6 +36,7 @@ public class MateriaController {
             materiaDTO.setTaAsistenciaObligatoria(materia.getTaAsistenciaObligatoria());
             return ResponseEntity.ok(materiaDTO);
         }
+        
         return ResponseEntity.notFound().build();
     }
 

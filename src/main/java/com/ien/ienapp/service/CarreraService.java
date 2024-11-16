@@ -71,6 +71,7 @@ public class CarreraService {
                     dto.setDeSede(carrera.getDeSede());
                     dto.setNuDuracionHoras(carrera.getNuDuracionHoras());
                     dto.setDeResponsable(carrera.getDeResponsable());
+                    dto.setTiCarrera(carrera.getTiCarrera());
                     dto.setPlanesEstudioId(carrera.getPlanesEstudio().getId()); // Cambiado aquí
                     return dto;
                 })

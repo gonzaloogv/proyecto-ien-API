@@ -39,7 +39,7 @@ public class Inscripciones {
     private PlanesEstudios planesEstudios;
 
     @Column(name = "nu_dni", nullable = false)
-    private Integer nuDni;
+    private BigInteger nuDni;
 
     @Column(name = "de_nombre", nullable = false)
     private String deNombre;

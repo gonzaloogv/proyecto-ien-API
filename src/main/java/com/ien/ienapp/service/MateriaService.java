@@ -62,7 +62,13 @@ public class MateriaService {
                 .map(this::convertirAMateriaDTO) // Usando el método convertirAMateriaDTO
                 .collect(Collectors.toList());
     }
-
+    public List<MateriaDTO> getMateriasByCarreraId(Integer carreraId) {
+        List<Materia> materias = materiaRepository.findByCarreraId(carreraId);
+        
+        return materias.stream()
+                       .map(this::convertirAMateriaDTO) // Usando el método convertirAMateriaDTO
+                       .collect(Collectors.toList());
+    }
     // Obtener una materia por ID
     public Optional<Materia> obtenerMateriaPorId(Integer id) {
         return materiaRepository.findById(id);

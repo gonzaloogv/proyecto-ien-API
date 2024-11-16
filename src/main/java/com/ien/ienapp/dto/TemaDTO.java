@@ -3,7 +3,10 @@ package com.ien.ienapp.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import java.time.LocalDate;
 
 @Getter
@@ -11,13 +14,14 @@ import java.time.LocalDate;
 public class TemaDTO {
     private Integer id;
 
-    @NotNull(message = "Title cannot be null")
+    @NotBlank(message = "El titulo es obligatorio")
+    @Size(min = 5, max = 100, message = "El titulo debe tener un maximo de 100 caracteres")
     private String deTitulo;
 
-    @NotNull(message = "Description cannot be null")
+    @NotBlank(message = "La descripcion es obligatoria")
     private String deDescripcion;
 
-    @NotNull(message = "Registration date cannot be null")
+    @NotNull(message = "La fecha de registro es obligatoria")
     private LocalDate feRegistro;
 
     private Integer idMateria;
