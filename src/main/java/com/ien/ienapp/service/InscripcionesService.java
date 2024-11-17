@@ -83,6 +83,12 @@ public class InscripcionesService {
                 .collect(Collectors.toList());
     }
 
+    public List<InscripcionesDTO> obtenerInscripcionesPorAlumnoId(Integer idAlumno) { 
+        return inscripcionesRepository.findById_IdAlumno(idAlumno).stream() 
+                .map(this::convertirAInscripcionesDTO) 
+                .collect(Collectors.toList()); 
+    }
+
     private InscripcionesDTO convertirAInscripcionesDTO(Inscripciones inscripcion) {
         // Convertir entidad Inscripciones a DTO
         InscripcionesDTO dto = new InscripcionesDTO();

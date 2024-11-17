@@ -27,4 +27,16 @@ public class InscripcionesController {
         List<InscripcionesDTO> inscripciones = inscripcionesService.obtenerInscripciones();
         return ResponseEntity.ok(inscripciones);
     }
+
+    @GetMapping("/alumno/{idAlumno}")
+    public ResponseEntity<List<InscripcionesDTO>> getInscripcionesByAlumnoId(@PathVariable Integer idAlumno) {
+        List<InscripcionesDTO> inscripciones = inscripcionesService.obtenerInscripcionesPorAlumnoId(idAlumno);
+
+        if (inscripciones.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(inscripciones);
+    }
+
 }
