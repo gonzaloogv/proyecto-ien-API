@@ -1,6 +1,7 @@
 package com.ien.ienapp.control;
 
 import com.ien.ienapp.dto.MateriaTemaDTO;
+import com.ien.ienapp.dto.TemaDTO;
 import com.ien.ienapp.entity.MateriaTema;
 import com.ien.ienapp.service.MateriaTemaService;
 
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/materiatema")
 public class MateriaTemaController {
 
@@ -32,6 +34,15 @@ public class MateriaTemaController {
         try {
             List<MateriaTema> relaciones = materiaTemaService.getAllRelaciones();
             return ResponseEntity.ok(relaciones);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+     @GetMapping("/materia/{idMateria}")
+    public ResponseEntity<List<TemaDTO>> getTemasByMateriaId(@PathVariable Integer idMateria) {
+        try {
+            List<TemaDTO> temas = materiaTemaService.getTemasByMateriaId(idMateria);
+            return ResponseEntity.ok(temas);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }

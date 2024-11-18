@@ -53,6 +53,12 @@ public class ProfesoresMateriasService {
         return profesoresMateriasRepository.save(profesoresMaterias);
     }
 
+    public List<ProfesoresDTO> obtenerMateriasPorIdProfesor(Integer idProfesor) {
+        List<ProfesoresMaterias> profesoresMateriasList = profesoresMateriasRepository.findById_IdProfesor(idProfesor);
+        return profesoresMateriasList.stream()
+                .map(this::convertirProfesoresMateriasDTO)
+                .collect(Collectors.toList());
+    }
 
     public ProfesoresMaterias actualizarProfesoresMaterias(Integer idProfesor, Integer idMateria, ProfesoresDTO profesoresDTO) {
         // Crear una instancia de ProfesoresMateriasId usando los IDs de profesor y materia

@@ -1,5 +1,6 @@
 package com.ien.ienapp.service;
 
+import com.ien.ienapp.dto.TemaDTO;
 import com.ien.ienapp.entity.Materia;
 import com.ien.ienapp.entity.MateriaTema;
 import com.ien.ienapp.entity.MateriaTemaId;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MateriaTemaService {
@@ -52,6 +54,17 @@ public class MateriaTemaService {
     }
     public List<MateriaTema> getAllRelaciones() {
         return materiaTemaRepository.findAll(); // Asegúrate de que el repositorio tenga este método
+    }
+
+    public List<TemaDTO> getTemasByMateriaId(Integer idMateria) {
+        List<MateriaTema> materiaTemas = materiaTemaRepository.findByMateria_Id(idMateria);
+        
+        return materiaTemas.stream()
+                           .map(materiaTema -> {
+                               Tema tema = materiaTema.getTema();
+                               return new TemaDTO(tema.getId(), tema.getDeTitulo(), tema.getDeDescripcion());
+                           })
+                           .collect(Collectors.toList());
     }
 }
 

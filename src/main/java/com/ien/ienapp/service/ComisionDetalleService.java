@@ -120,6 +120,9 @@ public class ComisionDetalleService {
     
         return dto;
     }
+    public List<ComisionDetalle> getAlumnosByMateriaId(Integer idMateria) { 
+        return comisionDetalleRepository.findByMateriaId(idMateria); 
+    }
 
     public void eliminarComisionDetalle(Integer id) {
         if (comisionDetalleRepository.existsById(id)) {

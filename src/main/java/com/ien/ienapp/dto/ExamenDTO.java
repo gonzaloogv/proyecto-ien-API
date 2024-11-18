@@ -52,4 +52,20 @@ public class ExamenDTO {
     private Date feRegistro;
 
     private Date feModificacion;
+
+    // Constructor
+    public ExamenDTO(Integer id, Integer idMateria, Integer idAlumno, Integer idProfesor, Date feExamen, String deCondicion, Double nuNota, String tiExamen, LocalTime hrExamen, String snAusente) {
+        this.id = id;
+        this.idMateria = idMateria;
+        this.idAlumno = idAlumno;
+        this.idProfesor = idProfesor;
+        this.feExamen = feExamen;
+        this.deCondicion = deCondicion;
+        this.nuNota = nuNota;
+        this.tiExamen = tiExamen;
+        this.hrExamen = hrExamen;
+        this.snAusente = snAusente;
+    }
+
+    public ExamenDTO() {}
 }

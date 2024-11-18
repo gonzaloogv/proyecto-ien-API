@@ -30,11 +30,10 @@ public class TitulosController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Titulos> obtenerTitulosPorId(Integer id) {
+    public Optional<Titulos> obtenerTitulosPorId(@PathVariable Integer id) {
         return titulosRepository.findById(id);  // Esto sigue devolviendo un Optional
     }
-
-
+    
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Titulos crearTitulo(@RequestBody ProfesoresDTO profesoresDTO) {

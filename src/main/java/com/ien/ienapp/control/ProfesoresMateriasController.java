@@ -37,7 +37,16 @@ public class ProfesoresMateriasController {
                 .map(value -> ResponseEntity.ok(profesoresMateriasService.convertirProfesoresMateriasDTO(value)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-    
+
+    @GetMapping("/profesor/{idProfesor}")
+    public ResponseEntity<List<ProfesoresDTO>> obtenerMateriasPorIdProfesor(@PathVariable Integer idProfesor) {
+        List<ProfesoresDTO> materias = profesoresMateriasService.obtenerMateriasPorIdProfesor(idProfesor);
+        if (materias.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(materias);
+        }
+    }
 
     @PostMapping
     public ResponseEntity<?> crearProfesoresMaterias(@Valid @RequestBody ProfesoresDTO profesorDTO, BindingResult result) {

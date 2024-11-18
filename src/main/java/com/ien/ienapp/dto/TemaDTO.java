@@ -25,4 +25,9 @@ public class TemaDTO {
     private LocalDate feRegistro;
 
     private Integer idMateria;
+    public TemaDTO(Integer id, String deTitulo, String deDescripcion) {
+        this.id = id;
+        this.deTitulo = deTitulo;
+        this.deDescripcion = deDescripcion;
+    }
 }

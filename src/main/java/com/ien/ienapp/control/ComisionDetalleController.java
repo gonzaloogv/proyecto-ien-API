@@ -48,6 +48,16 @@ public class ComisionDetalleController {
         ComisionDetalleDTO comisionDetalleDTO = comisionDetalleService.convertirComisionDetalleDTO(comisionDetalle); // Convertir Alumno a RRHHDTO
         return ResponseEntity.ok(comisionDetalleDTO);
     }
+    
+    @GetMapping("/materia/{idMateria}") 
+    public ResponseEntity<List<ComisionDetalle>> getAlumnosByMateriaId(@PathVariable Integer idMateria) { 
+        try { List<ComisionDetalle> alumnos = comisionDetalleService.getAlumnosByMateriaId(idMateria); 
+            return ResponseEntity.ok(alumnos); 
+        } catch (Exception e) { 
+            e.printStackTrace(); 
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null); 
+        } 
+    }
 
     @GetMapping
     public ResponseEntity<List<ComisionDetalleDTO>> obtenerComisionDetalle() {

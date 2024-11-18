@@ -40,6 +40,15 @@ public class ProfesoresTitulosController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/profesor/{idProfesor}")
+    public ResponseEntity<List<ProfesoresDTO>> obtenerTitulosPorIdProfesor(@PathVariable Integer idProfesor) {
+        List<ProfesoresDTO> titulos = profesoresTitulosService.obtenerTitulosPorIdProfesor(idProfesor);
+        if (titulos.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(titulos);
+        }
+    }
     // Crear una nueva relación de título para un profesor
     @PostMapping
     public ResponseEntity<?> crearProfesoresTitulos(@Valid @RequestBody ProfesoresDTO profesorDTO, BindingResult result) {

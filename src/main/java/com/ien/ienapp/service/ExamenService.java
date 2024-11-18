@@ -101,6 +101,10 @@ public class ExamenService {
         return convertirExamenDTO(examen);
     }
 
+    public List<Examen> getExamenesByMateriaId(Integer idMateria) { 
+        return examenRepository.findByMateria_Id(idMateria); 
+    }
+
     public void eliminarExamen(Integer id) {
         if (examenRepository.existsById(id)) {
             examenRepository.deleteById(id);

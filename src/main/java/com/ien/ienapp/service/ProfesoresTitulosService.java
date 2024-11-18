@@ -96,6 +96,13 @@ public class ProfesoresTitulosService {
         return profesoresTitulosRepository.findById(id);
     }
     
+    public List<ProfesoresDTO> obtenerTitulosPorIdProfesor(Integer idProfesor) {
+        List<ProfesoresTitulos> profesoresTitulosList = profesoresTitulosRepository.findById_IdProfesor(idProfesor);
+        return profesoresTitulosList.stream()
+                .map(this::convertirProfesoresTitulosDTO)
+                .collect(Collectors.toList());
+    }
+    
 
     public void eliminarProfesoresTitulos(Integer idProfesor, Integer idTitulo) {
         ProfesoresTitulosId id = new ProfesoresTitulosId(idProfesor, idTitulo);
