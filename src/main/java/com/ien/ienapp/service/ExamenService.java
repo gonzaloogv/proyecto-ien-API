@@ -105,6 +105,10 @@ public class ExamenService {
         return examenRepository.findByMateria_Id(idMateria); 
     }
 
+    public List<Examen> getCorreccionesByProfesorId(Integer idProfesor) { 
+        return examenRepository.findByProfesor_Id(idProfesor); 
+    }
+
     public void eliminarExamen(Integer id) {
         if (examenRepository.existsById(id)) {
             examenRepository.deleteById(id);

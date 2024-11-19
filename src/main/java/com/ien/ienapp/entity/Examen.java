@@ -12,6 +12,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import java.time.LocalTime;
 import java.util.Date;
 import lombok.Getter;
@@ -58,10 +61,12 @@ public class Examen {
 
     @Column(name = "fe_registro", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
     private Date feRegistro;
 
     @Column(name = "fe_modificacion")
     @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
     private Date feModificacion;
 
     public Examen(){}

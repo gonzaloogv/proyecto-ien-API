@@ -62,8 +62,10 @@ public class ExamenController {
         } 
     }
 
-
-
+    @GetMapping("/profesor/{idProfesor}") public ResponseEntity<List<Examen>> getCorreccionesByProfesorId(@PathVariable Integer idProfesor) { 
+        List<Examen> correcciones = examenService.getCorreccionesByProfesorId(idProfesor); 
+        return ResponseEntity.ok(correcciones); 
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<ExamenDTO> actualizarExamen(@PathVariable Integer id, @RequestBody ExamenDTO examenDTO) {

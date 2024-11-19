@@ -8,4 +8,6 @@ import com.ien.ienapp.entity.Examen;
 
 public interface ExamenRepository extends JpaRepository<Examen, Integer> {
     List<Examen> findByMateria_Id(Integer idMateria);
+    List<Examen> findByProfesor_Id(Integer idProfesor);
+
 }
