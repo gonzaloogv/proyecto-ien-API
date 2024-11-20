@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +27,7 @@ public class ComisionDetalleDTO {
     private Integer idComision;
 
     @NotBlank(message = "La descripcion es necesaria")
-    @Size(min = 5, max = 100, message = "La dirección debe tener entre 5 y 100 caracteres")
+
     private String deDescripcion;
 
     private String nuCodigoComision;
