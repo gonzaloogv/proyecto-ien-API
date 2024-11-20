@@ -25,6 +25,9 @@ public class Aula {
     @Column(name = "nu_capacidad_max", nullable = false)
     private Integer nuCapacidadMax;
 
+    @Column(name = "de_aula", nullable = false)
+    private String deAula;
+
     @Column(name = "fe_registro", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date feRegistro;

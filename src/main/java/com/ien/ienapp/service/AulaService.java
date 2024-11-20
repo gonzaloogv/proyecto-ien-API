@@ -23,6 +23,7 @@ public class AulaService {
     public Aula crearAula(ComisionDetalleDTO comisionDetalleDTO) {
         Aula aula = new Aula();
         aula.setIdAula(comisionDetalleDTO.getIdAula());
+        aula.setDeAula(comisionDetalleDTO.getDeAula());
         aula.setNuCapacidadMax(comisionDetalleDTO.getNuCapacidadMax());
         aula.setFeRegistro(comisionDetalleDTO.getFeRegistro());
         aula.setFeModificacion(comisionDetalleDTO.getFeModificacion());
@@ -45,6 +46,7 @@ public class AulaService {
         if (aulaRepository.existsById(id)) {
             Aula aula = new Aula();
             aula.setIdAula(id);
+            aula.setDeAula(comisionDetalleDTO.getDeAula());
             aula.setNuCapacidadMax(comisionDetalleDTO.getNuCapacidadMax());
             aula.setFeModificacion(comisionDetalleDTO.getFeModificacion());
             return aulaRepository.save(aula);
@@ -63,6 +65,7 @@ public class AulaService {
     public ComisionDetalleDTO convertirAulaDTO(Aula aula) {
         ComisionDetalleDTO dto = new ComisionDetalleDTO();
         dto.setIdAula(aula.getIdAula());
+        dto.setDeAula(aula.getDeAula());
         dto.setNuCapacidadMax(aula.getNuCapacidadMax());
         dto.setFeRegistro(aula.getFeRegistro());
         return dto;

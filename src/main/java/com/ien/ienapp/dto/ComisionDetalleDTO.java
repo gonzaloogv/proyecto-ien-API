@@ -54,6 +54,8 @@ public class ComisionDetalleDTO {
     @NotNull(message = "El ID aula es obligatorio")
     private Integer idAula;
 
+    private String deAula;
+
     private Integer nuCapacidadMax;
 
     // horario
